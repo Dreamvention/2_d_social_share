@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>d_social_share</name>
+    <code>d_social_share</code>
+    <description>d_social_share</description>
+    <version>1.0.0</version>
+    <author>Dreamwention Team</author>
+    <link>http://www.dreamvention.ee/</link>
+    <file path="catalog/controller/account/register.php">
+        <operation>
+            <search>
+                <![CDATA[if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {]]></search>
+            <add position="replace" offset="4"><![CDATA[
+            // a_vqmod_d_social_share.xml
+            if($this->config->get('d_social_share_status')){
+                $template = 'd_social_share';
+            }else{
+                $template = 'register';
+            }
+
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/'.$template.'.tpl')) {
+                $template = $this->config->get('config_template') . '/template/checkout/'.$template.'.tpl';
+            } else {
+                $template = 'default/template/checkout/'.$template.'.tpl';
+            }
+            $this->response->setOutput($this->load->view($template, $data));]]>
+            </add>
+        </operation>
+    </file>
+    <file path="catalog/controller/account/register.php">
+        <operation error="skip">
+            <search><![CDATA[$this->response->setOutput($this->load->view('account/register', $data));]]></search>
+            <add position="replace"><![CDATA[
+            // a_vqmod_d_social_share.xml
+            if($this->config->get('d_social_share_status')){
+                $template = 'd_social_share';
+            }else{
+                $template = 'register';
+            }
+            $this->response->setOutput($this->load->view('account/'.$template, $data));]]></add>
+        </operation>
+    </file>
+    <file path="catalog/controller/account/register.php">
+        <operation>
+            <search><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add position="before"><![CDATA[
+        if($this->config->get('d_social_share_status')){
+            $data['d_social_share'] = $this->load->controller('extension/module/d_social_share');
+        }
+        ]]></add>
+        </operation>
+    </file>
+
+
+</modification>
