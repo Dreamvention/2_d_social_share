@@ -3,7 +3,7 @@
  *	location: admin/model
  */
 
-class ModelExtensionModuleDRegistration extends Model
+class ModelExtensionModuleDSocialShare extends Model
 {
     public function installDatabase()
     {

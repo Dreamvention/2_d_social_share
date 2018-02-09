@@ -1,8 +1,8 @@
 <?php
 // Heading
-$_['heading_title']             = ' <span style="color:#449DD0; font-weight:bold">Registration</span><span style="font-size:12px; color:#999"> by <a href="http://www.opencart.com/index.php?route=extension/extension&filter_username=Dreamvention" style="font-size:1em; color:#999" target="_blank">Dreamvention</a></span>';
-$_['heading_title_main']        = 'Registration';
-$_['text_edit']                 = 'Edit Registration module';
+$_['heading_title']             = ' <span style="color:#449DD0; font-weight:bold">Social Share</span><span style="font-size:12px; color:#999"> by <a href="http://www.opencart.com/index.php?route=extension/extension&filter_username=Dreamvention" style="font-size:1em; color:#999" target="_blank">Dreamvention</a></span>';
+$_['heading_title_main']        = 'Social Share';
+$_['text_edit']                 = 'Edit Social Share module';
 $_['text_module']                 = 'module';
 
 // Modules
@@ -19,7 +19,7 @@ $_['error_failed']              = 'Oops! We could not connect to the server. Ple
 $_['button_get_update']         = 'Check for update';
 
 $_['entry_return_page_url']     = 'Enter the page url that will be used for a newly registered customer to return to (leave empty and the user will return to the previous page).';
-$_['entry_fields_sort_order']   = 'Sort and activate fields for the popup screen for the first Registration action, which is the registration of a new customer. (email is not present because its activated by default) ';
+$_['entry_fields_sort_order']   = 'Sort and activate fields for the popup screen for the first Social Share action, which is the Social Share of a new customer. (email is not present because its activated by default) ';
 $_['text_display']              = 'Display';
 $_['text_require']              = 'Require';
 

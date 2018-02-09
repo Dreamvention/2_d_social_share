@@ -60,14 +60,14 @@
         "catalog/controller/extension/module/d_social_share.php",
         "catalog/model/extension/module/d_social_share.php",
         "catalog/language/en-gb/extension/module/d_social_share.php",
-        "catalog/view/theme/default/template/extension/module/d_social_share.twig",
+        "catalog/view/theme/default/template/extension/module/d_social_share.twig"
     ],
     "dirs": [
         "admin/view/stylesheet/d_social_share",
         "admin/view/javascript/d_social_share",
         "image/catalog/d_social_share",
         "catalog/view/javascript/d_social_share",
-        "catalog/view/theme/default/stylesheet/d_social_share",
+        "catalog/view/theme/default/stylesheet/d_social_share"
     ],
     "changelog": [
 

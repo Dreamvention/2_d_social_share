@@ -11,6 +11,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         parent::__construct($registry);
         $this->load->language($this->route);
         $this->load->model($this->route);
+        $this->load->config($this->id);
         $this->load->model('design/layout');
         $this->load->model('setting/setting');
         $this->load->model('customer/customer_group');
@@ -56,23 +57,29 @@ class ControllerExtensionModuleDSocialShare extends Controller
             $store_id = $this->request->get['store_id'];
         } else {
             $store_id = 0;
+
         }
 
         // Saving
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
             // 3.x fix
+            $config[$this->id.'_setting'] = $this->config->get($this->id);
             if (VERSION >= '3.0.0.0') {
                 $sl_post_array = array();
                 if ($this->request->post[$this->id . '_status'] == 0) {
                     $sl_post_array['module_' . $this->id . '_status'] = 0;
+                    $config[$this->id . '_status'] = 0;
                 } elseif ($this->request->post[$this->id . '_status'] == 1) {
                     $sl_post_array['module_' . $this->id . '_status'] = 1;
+                    $config[$this->id . '_status'] = 1;
+
                 }
                 $this->model_setting_setting->editSetting('module_' . $this->id, $sl_post_array, $store_id);
             }
-
-            $this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
+            //loading config
+            $config[$this->id.'_setting']['buttons'] = $this->model_extension_module_d_social_share->loadButtons($this->id);
+            $this->model_setting_setting->editSetting($this->id, $config, $store_id);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -137,12 +144,12 @@ class ControllerExtensionModuleDSocialShare extends Controller
         //check if exist config in db
         if ($this->model_setting_setting->getSetting($this->id)) {
             $setting = $this->model_setting_setting->getSetting($this->id);
-            $data['setting'] = ($setting) ? $setting[$this->id . '_setting'] : array();
+            $data['setting'] = (isset($setting[$this->id . '_setting'])) ? $setting[$this->id . '_setting'] : array();
         } else {
             $data['setting'] = array();
         }
         //inherit users data
-        $data['setting'] =array_replace_recursive($config, $data['setting']);
+        $data['setting'] = array_replace_recursive($config, $data['setting']);
 
         // Breadcrumbs
         $data['breadcrumbs'] = array();
@@ -167,6 +174,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
         $this->response->setOutput($this->model_extension_d_opencart_patch_load->view($this->route, $data));
     }
+
     protected function validate()
     {
         if (!$this->user->hasPermission('modify', $this->route)) {
@@ -183,6 +191,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
             return false;
         }
     }
+
     public function install()
     {
         if ($this->d_shopunity) {
@@ -195,6 +204,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->model_extension_d_opencart_patch_modification->refreshCache();
 //        $this->model_extension_module_d_social_share->installDatabase();
     }
+
     public function uninstall()
     {
         $this->load->model($this->route);
@@ -203,11 +213,14 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->model_extension_d_opencart_patch_modification->refreshCache();
 //        $this->model_extension_module_d_social_share->uninstallDatabase();
     }
-    public function getZone() {
+
+    public function getZone()
+    {
         $json = $this->model_extension_module_d_social_share->getZonesByCountryId($this->request->get['country_id']);
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
     }
+
     private function getTextFields()
     {
         $data = array();
