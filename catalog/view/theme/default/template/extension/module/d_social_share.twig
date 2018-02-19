@@ -10,47 +10,56 @@
             .d-social-button {
             {{ design.border_radius_set[design.border_radius]}};
             }
+
             {% for button in buttons %}
             /*btn colors */
             .{{ button.id }} {
                 color: {{ button.color }};
                 background-color: {{ button.background_color }};
             }
+
             .{{ button.id }}:hover {
                 color: {{ button.color }};
                 background-color: {{ button.background_color_active }};
             }
+
             .{{ button.id }}:active {
                 color: {{ button.color }};
                 background-color: {{ button.background_color_hover }};
             }
+
             /*btn sizes*/
             .{{ button.id }} * {
             {% for css, value in design.sizes[design.size]  %}{{ css }}:{{ value }};
             {% endfor %}
             }
+
             /*btn fix position icon*/
             .d-social-button.{{ button.id }} span {
             {% if button.icon_position == "before" %} padding-left: 0;
             {% elseif button.icon_position == "after" %} padding-right: 0;
             {% endif %}
             }
+
             {% if button.text == '' %}
             .d-social-button.{{ button.id }} span {
                 padding: 0;
             }
+
             {% endif %}
             {% if design.border_radius == 'round' %}
-            .d-social-button.{{ button.id }}{
-                width:{{ design.width }};
-                height:{{ design.width }};
+            .d-social-button.{{ button.id }} {
+                width: {{ design.width }};
+                height: {{ design.width }};
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-            .d-social-button span{
+
+            .d-social-button span {
                 display: none;
             }
+
             {% endif %}
 
             {% endfor %}
@@ -58,16 +67,20 @@
         </style>
         <div class="d-social-buttons-container ">
             {% for button in buttons %}
-                <a class="d-social-button {{ button.id }} {{ design.shadow }}" title="{{ button.title }}"
-                   onclick="socialShareManager('{{ button.id }}');">
-                    {% if button.icon_position == "before" %}
-                        <i class="fab {{ button.icon }}"></i>
-                        <span>{{ button.text }}</span>
-                    {% elseif button.icon_position == "after" %}
-                        <span>{{ button.text }}</span>
-                        <i class="fab {{ button.icon }}"></i>
-                    {% endif %}
-                </a>
+                <div class="d-social-button-wrap">
+                    <a class="d-social-button {{ button.id }} {{ design.shadow }}"
+                       title="{{ button.title }}"
+                       data-count="..." data-social="{{ button.id }}">
+                        {#onclick="socialShareManager('{{ button.id }}');">#}
+                        {% if button.icon_position == "before" %}
+                            <i class="fa {{ button.icon }}"></i>
+                            <span>{{ button.text }}</span>
+                        {% elseif button.icon_position == "after" %}
+                            <span>{{ button.text }}</span>
+                            <i class="fa {{ button.icon }}"></i>
+                        {% endif %}
+                    </a>
+                </div>
             {% endfor %}
         </div>
     {% endif %}
@@ -75,3 +88,10 @@
 <div class="project-link">
     <a href="https://github.com/MarufSarker/tutorial-social-share-buttons/">Project Files on 2</a>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-social]').socialButtons();
+    })
+
+</script>

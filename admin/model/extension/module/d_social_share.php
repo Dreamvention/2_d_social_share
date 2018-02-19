@@ -44,7 +44,6 @@ class ModelExtensionModuleDSocialShare extends Model
         return false;
     }
 
-    //todo we got the same methods in model d_sholunity extension-isInstalled,installDepe.. etc
     public function isInstalled($code)
     {
         $extension_data = array();

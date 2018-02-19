@@ -5,7 +5,7 @@ $_['d_social_share'] = array(
     "design" => array(
         'size' => 'medium',
         'shadow' => 'outer_shadow',//set class
-        'border_radius'=>'round',
+        'border_radius'=>'no',
         'border_radius_set' => array(
             'yes' => 'border-radius:2px',//set css value
             'no' => 'border-radius:0',
@@ -34,7 +34,8 @@ $_['d_social_share'] = array(
             'small' => 'text_small',
             'nano' => 'text_nano'
         ),
-        'type'=>'floating'
+        'type'=>'floating',
+        'count_position'=>'right'
     ),
     "count_share" => array(
         'enable' => false

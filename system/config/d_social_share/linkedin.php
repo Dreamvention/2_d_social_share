@@ -5,7 +5,7 @@ $_['d_social_share_linkedin'] = array(
         "keys" => array("id" => "", "secret" => ""),
         "id" => 'linkedin',
         "sort_order" => 1,
-        'icon'=>'fa-linkedin-in',
+        'icon'=>'fa-linkedin',
         "icon_position" => 'after',
         "text" => 'text_linkedin',
         "title" => 'text_linkedin',
