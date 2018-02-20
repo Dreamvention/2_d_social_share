@@ -7,7 +7,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
 {
 
     private $route = 'extension/module/d_social_share';
-    private $id = 'd_social_share';
+    private $codename = 'd_social_share';
     private $setting = array();
     private $error = array();
     private $js_folde;
@@ -16,13 +16,13 @@ class ControllerExtensionModuleDSocialShare extends Controller
     public function __construct($registry)
     {
         parent::__construct($registry);
-        $this->setting = $this->config->get($this->id . '_setting');
+        $this->setting = $this->config->get($this->codename . '_setting');
         $this->language->load($this->route);
         $this->load->model($this->route);
         $this->load->model('extension/d_opencart_patch/load');
         $this->load->model('setting/setting');
-        $this->js_folder = 'catalog/view/theme/default/javascript/' . $this->id;
-        $this->css_folder = 'catalog/view/theme/default/stylesheet/' . $this->id;
+        $this->js_folder = 'catalog/view/javascript/' . $this->codename;
+        $this->css_folder = 'catalog/view/theme/default/stylesheet/' . $this->codename;
     }
 
 
@@ -32,10 +32,13 @@ class ControllerExtensionModuleDSocialShare extends Controller
         if (!$this->setting) {
             $this->session->data['d_social_share_error']['setting_error'] = 'could not load settings';
         }
-        if (!$this->config->get($this->id . '_status')) {
+        if (!$this->config->get($this->codename . '_status')) {
             return false;
         }
         $this->document->addStyle($this->css_folder.'/styles.css');
+        $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials.css');
+        $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials-theme-classic.css');
+        $this->document->addScript($this->js_folder.'/jssocials/dist/jssocials.min.js');
         $this->document->addScript($this->js_folder.'/jquery.social-buttons.js','footer');
 
         $buttons = $this->setting['buttons'];

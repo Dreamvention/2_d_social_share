@@ -84,14 +84,41 @@
             {% endfor %}
         </div>
     {% endif %}
-</div>
-<div class="project-link">
-    <a href="https://github.com/MarufSarker/tutorial-social-share-buttons/">Project Files on 2</a>
+
+    <div id="share"></div>
+    <script>
+        $(document).ready(function () {
+        $("#share").jsSocials({
+            url: 'http://localhost/302/d_social_share',
+            text: "Google Search Page",
+            showCount: true,
+            showLabel: false,
+            shareIn: "popup",
+            shares: [
+                "email",
+                "twitter",
+                "pocket",
+                "viber",
+                "messenger",
+                "telegram",
+                "twitter",
+                "rss",
+                "line",
+                "vkontakte",
+                "facebook",
+                "googleplus",
+                "linkedin",
+                "pinterest",
+                "stumbleupon",
+                "whatsapp"
+            ]
+        });
+        })
+
+    </script>
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('[data-social]').socialButtons();
-    })
+
 
 </script>
