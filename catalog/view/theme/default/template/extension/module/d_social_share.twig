@@ -65,54 +65,59 @@
             {% endfor %}
 
         </style>
-        <div class="d-social-buttons-container ">
-            {% for button in buttons %}
-                <div class="d-social-button-wrap">
-                    <a class="d-social-button {{ button.id }} {{ design.shadow }}"
-                       title="{{ button.title }}"
-                       data-count="..." data-social="{{ button.id }}">
-                        {#onclick="socialShareManager('{{ button.id }}');">#}
-                        {% if button.icon_position == "before" %}
-                            <i class="fa {{ button.icon }}"></i>
-                            <span>{{ button.text }}</span>
-                        {% elseif button.icon_position == "after" %}
-                            <span>{{ button.text }}</span>
-                            <i class="fa {{ button.icon }}"></i>
-                        {% endif %}
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+        {#<div class="d-social-buttons-container ">#}
+        {#{% for button in buttons %}#}
+        {#<div class="d-social-button-wrap">#}
+        {#<a class="d-social-button {{ button.id }} {{ design.shadow }}"#}
+        {#title="{{ button.title }}"#}
+        {#data-count="..." data-social="{{ button.id }}">#}
+        {#onclick="socialShareManager('{{ button.id }}');">#}
+        {#{% if button.icon_position == "before" %}#}
+        {#<i class="fa {{ button.icon }}"></i>#}
+        {#<span>{{ button.text }}</span>#}
+        {#{% elseif button.icon_position == "after" %}#}
+        {#<span>{{ button.text }}</span>#}
+        {#<i class="fa {{ button.icon }}"></i>#}
+        {#{% endif %}#}
+        {#</a>#}
+        {#</div>#}
+        {#{% endfor %}#}
+        {#</div>#}
     {% endif %}
 
     <div id="share"></div>
     <script>
         $(document).ready(function () {
-        $("#share").jsSocials({
-            url: 'http://localhost/302/d_social_share',
-            text: "Google Search Page",
-            showCount: true,
-            showLabel: false,
-            shareIn: "popup",
-            shares: [
-                "email",
-                "twitter",
-                "pocket",
-                "viber",
-                "messenger",
-                "telegram",
-                "twitter",
-                "rss",
-                "line",
-                "vkontakte",
-                "facebook",
-                "googleplus",
-                "linkedin",
-                "pinterest",
-                "stumbleupon",
-                "whatsapp"
-            ]
-        });
+            $("#share").jsSocials({
+                shares: [
+                    {% for button in buttons %}
+                    {
+                        share:{{ button.share }},
+                        label:{{ button.label }},
+                        logo:{{ button.logo }},
+                        css:{{ button.css }},
+                        {% if button.type =='email' %}
+                        to:{{ button.to }},
+                        {% endif %}
+                        shareIn:{{ button.shareIn }},
+                        {% if button.type =='twitter' %}
+                        to:{{ button.to }},
+                        {% endif %}
+                    },
+                    {% endfor %}
+                ],
+//                    {
+//                        //can be on each shareIn: "popup",
+//                        share: "twitter",           // name of share
+//                        label: "Tweet",             // share button text (optional)
+//                        // TODO if user login twitter   via: "artem_tabalin",       // custom twitter sharing param 'via' (optional)
+//                        //if prod has tags   hashtags: "jquery,plugin"   // custom twitter sharing param 'hashtags' (optional)
+//                    }
+                text: {{ share.text_to_share }},
+                showLabel: {{ share.showLabel }},
+                showCount: {{ share.showCount }},
+                shareIn: {{ share.popup }},
+            });
         })
 
     </script>

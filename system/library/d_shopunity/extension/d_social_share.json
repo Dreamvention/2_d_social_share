@@ -64,6 +64,7 @@
 
         "catalog/view/theme/default/template/stylesheet/d_social_share/styles.css",
         "catalog/view/javascript/d_social_share/jssocials/dist/jssocials.min.js",
+        "catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css",
         "catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css",
         "catalog/view/javascript/d_social_share/jquery.social-buttons.js"
     ],

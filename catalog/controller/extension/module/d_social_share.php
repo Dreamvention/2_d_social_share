@@ -39,15 +39,13 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials.css');
         $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials-theme-classic.css');
         $this->document->addScript($this->js_folder.'/jssocials/dist/jssocials.min.js');
-        $this->document->addScript($this->js_folder.'/jquery.social-buttons.js','footer');
 
         $buttons = $this->setting['buttons'];
         //load languages text
         foreach ($buttons as $key => $button) {
             $text = $this->language->get($button['text']);
             $title = $this->language->get($button['title']);
-            $buttons[$key]['text'] = $text;
-            $buttons[$key]['title'] = $title;
+            $buttons[$key] = $button;
         }
         $data['buttons'] = $buttons;
 
