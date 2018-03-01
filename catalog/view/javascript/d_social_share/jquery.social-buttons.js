@@ -76,7 +76,7 @@
             share: "https://www.linkedin.com/cws/share?url="
         },
         pinterest: {
-            url: "http://api.pinterest.com/v1/urls/count.json?url=",
+            url: "https://api.pinterest.com/v1/urls/count.json?url=",
             callback: function (data) {
                 if (data) {
                     this.count = data.count;

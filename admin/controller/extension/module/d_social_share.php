@@ -2,7 +2,7 @@
 
 class ControllerExtensionModuleDSocialShare extends Controller
 {
-    private $id = 'd_social_share';
+    private $codename = 'd_social_share';
     private $route = 'extension/module/d_social_share';
     private $error = array();
 
@@ -11,7 +11,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         parent::__construct($registry);
         $this->load->language($this->route);
         $this->load->model($this->route);
-        $this->load->config($this->id);
+        $this->load->config($this->codename);
         $this->load->model('design/layout');
         $this->load->model('setting/setting');
         $this->load->model('customer/customer_group');
@@ -21,7 +21,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->load->model('extension/d_opencart_patch/user');
         $this->d_shopunity = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_shopunity.json'));
         $this->d_opencart_patch = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_opencart_patch.json'));
-        $this->extension = json_decode(file_get_contents(DIR_SYSTEM . 'library/d_shopunity/extension/' . $this->id . '.json'), true);
+        $this->extension = json_decode(file_get_contents(DIR_SYSTEM . 'library/d_shopunity/extension/' . $this->codename . '.json'), true);
         $this->d_twig_manager = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_twig_manager.json'));
     }
 
@@ -29,7 +29,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
     {
         if ($this->d_shopunity) {
             $this->load->model('extension/d_shopunity/mbooth');
-            $this->model_extension_d_shopunity_mbooth->validateDependencies($this->id);
+            $this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
         }
 
         if ($this->d_twig_manager) {
@@ -64,22 +64,22 @@ class ControllerExtensionModuleDSocialShare extends Controller
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
             // 3.x fix
-            $config[$this->id.'_setting'] = $this->config->get($this->id);
+            $config[$this->codename.'_setting'] = $this->config->get($this->codename);
             if (VERSION >= '3.0.0.0') {
                 $sl_post_array = array();
-                if ($this->request->post[$this->id . '_status'] == 0) {
-                    $sl_post_array['module_' . $this->id . '_status'] = 0;
-                    $config[$this->id . '_status'] = 0;
-                } elseif ($this->request->post[$this->id . '_status'] == 1) {
-                    $sl_post_array['module_' . $this->id . '_status'] = 1;
-                    $config[$this->id . '_status'] = 1;
+                if ($this->request->post[$this->codename . '_status'] == 0) {
+                    $sl_post_array['module_' . $this->codename . '_status'] = 0;
+                    $config[$this->codename . '_status'] = 0;
+                } elseif ($this->request->post[$this->codename . '_status'] == 1) {
+                    $sl_post_array['module_' . $this->codename . '_status'] = 1;
+                    $config[$this->codename . '_status'] = 1;
 
                 }
-                $this->model_setting_setting->editSetting('module_' . $this->id, $sl_post_array, $store_id);
+                $this->model_setting_setting->editSetting('module_' . $this->codename, $sl_post_array, $store_id);
             }
             //loading config
-            $config[$this->id.'_setting']['buttons'] = $this->model_extension_module_d_social_share->loadButtons($this->id);
-            $this->model_setting_setting->editSetting($this->id, $config, $store_id);
+            $config[$this->codename.'_setting']['buttons'] = $this->model_extension_module_d_social_share->loadButtons($this->codename);
+            $this->model_setting_setting->editSetting($this->codename, $config, $store_id);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -87,10 +87,10 @@ class ControllerExtensionModuleDSocialShare extends Controller
         }
 
         // Status
-        if (isset($this->request->post[$this->id . '_status'])) {
-            $data[$this->id . '_status'] = $this->request->post[$this->id . '_status'];
+        if (isset($this->request->post[$this->codename . '_status'])) {
+            $data[$this->codename . '_status'] = $this->request->post[$this->codename . '_status'];
         } else {
-            $data[$this->id . '_status'] = $this->config->get($this->id . '_status');
+            $data[$this->codename . '_status'] = $this->config->get($this->codename . '_status');
         }
 
         // Status
@@ -113,7 +113,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->setTitle($this->language->get('heading_title_main'));
 
         // Variable
-        $data['id'] = $this->id;
+        $data['id'] = $this->codename;
         $data['route'] = $this->route;
         $data['store_id'] = $store_id;
         $data['version'] = $this->extension['version'];
@@ -139,12 +139,12 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
         // Setting
         //load  config from config dir
-        $this->config->load($this->id);
-        $config = $this->config->get($this->id);
+        $this->config->load($this->codename);
+        $config = $this->config->get($this->codename);
         //check if exist config in db
-        if ($this->model_setting_setting->getSetting($this->id)) {
-            $setting = $this->model_setting_setting->getSetting($this->id);
-            $data['setting'] = (isset($setting[$this->id . '_setting'])) ? $setting[$this->id . '_setting'] : array();
+        if ($this->model_setting_setting->getSetting($this->codename)) {
+            $setting = $this->model_setting_setting->getSetting($this->codename);
+            $data['setting'] = (isset($setting[$this->codename . '_setting'])) ? $setting[$this->codename . '_setting'] : array();
         } else {
             $data['setting'] = array();
         }
@@ -196,7 +196,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
     {
         if ($this->d_shopunity) {
             $this->load->model('extension/d_shopunity/mbooth');
-            $this->model_extension_d_shopunity_mbooth->installDependencies($this->id);
+            $this->model_extension_d_shopunity_mbooth->installDependencies($this->codename);
         }
         $this->load->model($this->route);
         $this->load->model('extension/d_opencart_patch/modification');

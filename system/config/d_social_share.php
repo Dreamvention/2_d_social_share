@@ -1,6 +1,10 @@
 <?php
 $_['d_social_share'] = array(
-    "status" => "1",
+    "status" => "-",
+    'cdn_lib' => false,
+    'custom_url' => 'https://paveldrvn.myshopunity.com/302/d_social_login/',
+    'id_placement' => '',
+    'native' => false,
     "buttons" => array(),
     "design" => array(
         'size' => 'medium',
@@ -25,7 +29,8 @@ $_['d_social_share'] = array(
             'small' => 'text_small',
             'nano' => 'text_nano'
         ),
-        'style'=>'flat',
+        'style' => 'classic',
+        'rounded' => true,
         'styles' => array(
             'flat',
             'classic',
@@ -48,9 +53,13 @@ $_['d_social_share'] = array(
     ),
     'share' => array(
         'text_to_share' => "Text to share",
-        'showLabel' => true,
-        'showCount' => true,
-        'shareIn' => 'popup'
+        'showLabel' => false,
+        'showCount' => 'inside',
+        'shareIn' => 'popup',
+        'breakpoints' => array(
+            'smallScreenWidth' => 640,
+            'largeScreenWidth' => 1024
+        )
     ),
     'popup_size' => array(
         'width' => '200px',

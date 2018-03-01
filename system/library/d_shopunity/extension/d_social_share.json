@@ -52,6 +52,13 @@
         "system/library/d_shopunity/install/d_social_share.xml",
         "system/config/d_social_share.php",
 
+        // configs for buttons
+        "system/config/d_social_share/facebook.php",
+        "system/config/d_social_share/google.php",
+        "system/config/d_social_share/linkedin.php",
+        "system/config/d_social_share/twitter.php",
+        "system/config/d_social_share/pinterest.php",
+
         "admin/controller/extension/module/d_social_share.php",
         "admin/model/extension/module/d_social_share.php",
         "admin/language/en-gb/extension/module/d_social_share.php",
@@ -61,18 +68,17 @@
         "catalog/model/extension/module/d_social_share.php",
         "catalog/language/en-gb/extension/module/d_social_share.php",
         "catalog/view/theme/default/template/extension/module/d_social_share.twig",
-
-        "catalog/view/theme/default/template/stylesheet/d_social_share/styles.css",
-        "catalog/view/javascript/d_social_share/jssocials/dist/jssocials.min.js",
-        "catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css",
-        "catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css",
-        "catalog/view/javascript/d_social_share/jquery.social-buttons.js"
+        "catalog/view/theme/default/template/stylesheet/d_social_share/styles.css"
     ],
     "dirs": [
         "admin/view/stylesheet/d_social_share",
-        "admin/view/javascript/d_social_share"
+        "admin/view/javascript/d_social_share",
+        "catalog/view/javascript/d_social_share/jssocials/dist"
     ],
     "changelog": [
-
+        {
+            "version":"1.0.1",
+            "change": "Creation of module"
+        }
     ]
 }

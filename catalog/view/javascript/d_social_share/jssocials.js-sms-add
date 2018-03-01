@@ -562,26 +562,7 @@
             delimiter: "?",
             countUrl: "",
             shareIn: "self"
-        },
-        reddit: {
-            label: "Reddit",
-            logo: "fa fa-reddit",
-            shareUrl: "https://www.reddit.com/submit?url={url}",
-            countUrl: ""
-        },
-        browser_messenger: {
-            label: "Share",
-            logo: "fa fa-commenting",
-            shareUrl: "https://www.facebook.com/dialog/send?app_id={appid}&link={url}&redirect_uri={redirect}",
-            countUrl: "",
-            shareIn: "self"
-        },
-        // instagramm: {
-        //     label: "Visit",
-        //     logo: "fa fa-instagram",
-        //     shareUrl: "https://www.instagram.com/adrian.piticariu/",
-        //     countUrl: ""
-        // }
+        }
 
     });
 

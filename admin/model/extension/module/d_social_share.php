@@ -12,7 +12,6 @@ class ModelExtensionModuleDSocialShare extends Model
 
     public function uninstallDatabase()
     {
-        $query = $this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "customer_authentication`");
     }
 
     /*

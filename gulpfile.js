@@ -5,7 +5,6 @@ var gulp           = require('gulp'),
     autoprefixer   = require('gulp-autoprefixer');
 
 var id_extension = 'd_social_login';
-// Обновление страниц сайта на локальном сервере
 gulp.task('browser-sync', function() {
     browserSync({
         proxy: "localhost",
@@ -13,7 +12,6 @@ gulp.task('browser-sync', function() {
     });
 });
 
-// Компиляция stylesheet.css
 gulp.task('sass', function() {
     return gulp.src('catalog/view/theme/default/stylesheet/d_social_share/styles.scss')
         .pipe(autoprefixer(['last 15 versions']))
@@ -23,7 +21,6 @@ gulp.task('sass', function() {
         .pipe(browserSync.reload({stream: true}))
 });
 
-// Наблюдение за файлами
 gulp.task('watch', ['sass', 'browser-sync'], function() {
     gulp.watch('catalog/view/theme/default/stylesheet/**/*.scss', ['sass']);
     gulp.watch('catalog/view/theme/default/template/**/*.twig', browserSync.reload);
