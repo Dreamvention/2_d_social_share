@@ -36,20 +36,20 @@ class ControllerExtensionModuleDSocialShare extends Controller
             return false;
         }
         $this->document->addStyle($this->css_folder.'/styles.css');
-        $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials.css');
-        $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials-theme-classic.css');
         $this->document->addScript($this->js_folder.'/jssocials/dist/jssocials.min.js');
-
-        $buttons = $this->setting['buttons'];
+        $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials.css');
+        $this->document->addStyle($this->js_folder.'/jssocials/dist/jssocials-theme-'.$this->setting['design']['style'].'.css');
         //load languages text
-        foreach ($buttons as $key => $button) {
-            $text = $this->language->get($button['text']);
-            $title = $this->language->get($button['title']);
+        $buttons =array();
+        foreach ($this->setting['buttons'] as $key => $button) {
             $buttons[$key] = $button;
+            $buttons[$key]['text'] = $this->language->get($button['text']);
+            $buttons[$key]['title'] = $this->language->get($button['title']);
         }
         $data['buttons'] = $buttons;
-
+//        print_r($this->setting);
         $data['design'] = $this->setting['design'];
+        $data['share'] = $this->setting['share'];
         //add fab
         //$this->document->addStyle('https://use.fontawesome.com/releases/v5.0.6/css/all.css');
 

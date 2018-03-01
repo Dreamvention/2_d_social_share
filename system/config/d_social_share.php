@@ -4,15 +4,6 @@ $_['d_social_share'] = array(
     "buttons" => array(),
     "design" => array(
         'size' => 'medium',
-        'shadow' => 'outer_shadow',//set class
-        'border_radius' => 'no',
-        'border_radius_set' => array(
-            'yes' => 'border-radius:2px',//set css value
-            'no' => 'border-radius:0',
-            'round' => 'border-radius:100%;',
-            'custom' => ''
-        ),
-        'width' => '45px',//uses when brdradius set
         'sizes' => array(
             'medium' => array(
                 'padding' => '5px 10px',
@@ -34,14 +25,32 @@ $_['d_social_share'] = array(
             'small' => 'text_small',
             'nano' => 'text_nano'
         ),
-        'type' => 'floating',
-        'count_position' => 'right'
+        'style'=>'flat',
+        'styles' => array(
+            'flat',
+            'classic',
+            'minimal',
+            'plain',
+            'custom' => array(
+                'shadow' => 'outer_shadow',//set class
+                'border_radius' => 'no',
+                'border_radius_set' => array(
+                    'yes' => 'border-radius:2px',//set css value
+                    'no' => 'border-radius:0',
+                    'round' => 'border-radius:100%;',
+                    'custom' => ''
+                ),
+                'width' => '45px',//uses when brdradius set
+                'type' => 'floating',
+                'count_position' => 'right'
+            ),
+        ),
     ),
     'share' => array(
         'text_to_share' => "Text to share",
-        'showLabel' => false,
+        'showLabel' => true,
         'showCount' => true,
-        'shareIn'=>'popup'
+        'shareIn' => 'popup'
     ),
     'popup_size' => array(
         'width' => '200px',
