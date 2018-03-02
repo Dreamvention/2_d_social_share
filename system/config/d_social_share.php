@@ -2,7 +2,7 @@
 $_['d_social_share'] = array(
     "status" => "-",
     'cdn_lib' => false,
-    'custom_url' => 'https://paveldrvn.myshopunity.com/302/d_social_login/',
+    'custom_url' => 'http://google.com',
     'id_placement' => '',
     'native' => false,
     "buttons" => array(),
@@ -54,7 +54,7 @@ $_['d_social_share'] = array(
     'share' => array(
         'text_to_share' => "Text to share",
         'showLabel' => false,
-        'showCount' => 'inside',
+        'showCount' => true,
         'shareIn' => 'popup',
         'breakpoints' => array(
             'smallScreenWidth' => 640,
@@ -66,4 +66,6 @@ $_['d_social_share'] = array(
         'height' => '300px'
     ),
 );
+// admin http://joxi.ru/RmzbE7zh0B35Mm
+// twitter http://opensharecount.com
 ?>

@@ -263,6 +263,9 @@
         },
 
         _getCountValue: function (response, share) {
+
+            console.log(share);
+            console.log(response);
             var count = ($.isFunction(share.getCount) ? share.getCount(response) : response) || 0;
             return (typeof count === "string") ? count : this._formatNumber(count);
         },
@@ -442,7 +445,10 @@
             label: "Tweet",
             logo: "fa fa-twitter",
             shareUrl: "https://twitter.com/share?url={url}&text={text}&via={via}&hashtags={hashtags}",
-            countUrl: ""
+            countUrl: "http://opensharecount.com/count.json?url={url}",
+            getCount: function (data) {
+                return data.count||0;
+            }
         },
 
         facebook: {
@@ -476,7 +482,7 @@
             label: "Share",
             logo: "fa fa-linkedin",
             shareUrl: "https://www.linkedin.com/shareArticle?mini=true&url={url}",
-            countUrl: "https://www.linkedin.com/countserv/count/share?format=jsonp&url={url}&callback=?",
+            countUrl: "https://www.linkedin.com/countserv/count/share?url=http://stylehatch.co&format=json",
             getCount: function (data) {
                 return data.count;
             }
