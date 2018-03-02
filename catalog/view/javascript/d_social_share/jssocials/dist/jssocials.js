@@ -445,7 +445,7 @@
             label: "Tweet",
             logo: "fa fa-twitter",
             shareUrl: "https://twitter.com/share?url={url}&text={text}&via={via}&hashtags={hashtags}",
-            countUrl: "http://opensharecount.com/count.json?url={url}",
+            countUrl: "https://opensharecount.com/count.json?url={url}",
             getCount: function (data) {
                 return data.count||0;
             }
@@ -482,7 +482,7 @@
             label: "Share",
             logo: "fa fa-linkedin",
             shareUrl: "https://www.linkedin.com/shareArticle?mini=true&url={url}",
-            countUrl: "https://www.linkedin.com/countserv/count/share?url=http://stylehatch.co&format=json",
+            countUrl: "https://www.linkedin.com/countserv/count/share?url=http://stylehatch.co&format=jsonp",
             getCount: function (data) {
                 return data.count;
             }
