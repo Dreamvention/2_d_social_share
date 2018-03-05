@@ -23,6 +23,8 @@ gulp.task('sass', function() {
 
 gulp.task('watch', ['sass', 'browser-sync'], function() {
     gulp.watch('catalog/view/theme/default/stylesheet/**/*.scss', ['sass']);
+    gulp.watch('catalog/controller/extension/module/d_social_share.php', browserSync.reload);
+    gulp.watch('system/config/d_social_share.php', browserSync.reload);
     gulp.watch('catalog/view/theme/default/template/**/*.twig', browserSync.reload);
     gulp.watch('catalog/view/theme/default/js/**/*.js', browserSync.reload);
     gulp.watch('catalog/view/theme/default/libs/**/*', browserSync.reload);

@@ -57,7 +57,6 @@ class ControllerExtensionModuleDSocialShare extends Controller
             $store_id = $this->request->get['store_id'];
         } else {
             $store_id = 0;
-
         }
 
         // Saving

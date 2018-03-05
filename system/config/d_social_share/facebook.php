@@ -9,6 +9,7 @@ $_['d_social_share_facebook'] = array(
             'label' => "+1",
             "logo" => 'fa fa-facebook',
         ),
+        'style_native' => false ,
         "sort_order" => 1,
         'icon' => 'fa-facebook-square',
         "icon_position" => 'before',

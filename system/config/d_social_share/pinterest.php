@@ -11,6 +11,7 @@ $_['d_social_share_pinterest'] = array(
             'media' => ""               // a url of media to share
         ),
         "sort_order" => 1,
+        'style_native' => false ,
         'icon' => 'fa-pinterest',
         "icon_position" => 'after',
         "text" => 'text_pinterest',

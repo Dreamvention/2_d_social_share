@@ -1,4 +1,4 @@
-{
+    {
     "codename": "d_social_share",
     "version": "1.0.1",
     "name": "",
@@ -52,7 +52,6 @@
         "system/library/d_shopunity/install/d_social_share.xml",
         "system/config/d_social_share.php",
 
-        // configs for buttons
         "system/config/d_social_share/facebook.php",
         "system/config/d_social_share/google.php",
         "system/config/d_social_share/linkedin.php",

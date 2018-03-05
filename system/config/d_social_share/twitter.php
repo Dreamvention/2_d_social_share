@@ -12,6 +12,7 @@ $_['d_social_share_twitter'] = array(
             'hashtags' => ""            // a comma-separated list of hashtags to be appended to Tweet text.
         ),
         "sort_order" => 1,
+        'style_native' => false ,
         'icon' => 'fa-twitter',
         "icon_position" => 'before',
         "text" => 'text_twitter',

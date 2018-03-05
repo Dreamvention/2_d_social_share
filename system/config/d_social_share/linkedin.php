@@ -10,6 +10,7 @@ $_['d_social_share_linkedin'] = array(
             'logo' => "fa fa-linkedin"
         ),
         "sort_order" => 1,
+        'style_native' => false ,
         'icon' => 'fa-linkedin',
         "icon_position" => 'after',
         "text" => 'text_linkedin',

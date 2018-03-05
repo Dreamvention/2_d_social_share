@@ -242,15 +242,28 @@
                 return deferred.resolve(0).promise();
             }
 
-            var handleSuccess = $.proxy(function (response) {
-                deferred.resolve(this._getCountValue(response, share));
+            var handleSuccess = $.proxy(function (response,VK) {
+                if(share.share !=='vkontakte'){
+                    deferred.resolve(this._getCountValue(response, share));
+                }else{
+                    deferred.resolve(this._getCountValue(VK, share));
+                }
             }, this);
 
+
             $.getJSON(countUrl).done(handleSuccess)
-                .fail(function () {
+                .fail(function (e) {
                     $.get(countUrl).done(handleSuccess)
-                        .fail(function () {
-                            deferred.resolve(0);
+                        .fail(function (e,ee) {
+                            //fix for VK
+                            if(share.share ==='vkontakte') {
+                                VK.Share.count = handleSuccess;
+                                var div = document.createElement('script');
+                                div.src = countUrl;
+                                document.body.appendChild(div);
+                            }else {
+                                deferred.resolve(0);
+                            }
                         });
                 });
 
@@ -263,9 +276,6 @@
         },
 
         _getCountValue: function (response, share) {
-
-            console.log(share);
-            console.log(response);
             var count = ($.isFunction(share.getCount) ? share.getCount(response) : response) || 0;
             return (typeof count === "string") ? count : this._formatNumber(count);
         },
@@ -427,7 +437,11 @@
     };
 
 }(window, jQuery));
-
+var VK = {};
+VK.Share = {};
+VK.Share.count = function (index,data) {
+    console.log(data)
+};
 
 (function (window, $, jsSocials, undefined) {
 
@@ -467,7 +481,7 @@
             shareUrl: "https://vk.com/share.php?url={url}&title={title}&description={text}",
             countUrl: "https://vk.com/share.php?act=count&index=1&url={url}",
             getCount: function (data) {
-                return parseInt(data.slice(15, -2).split(', ')[1]);
+               return data;
             }
         },
 
@@ -477,17 +491,15 @@
             shareUrl: "https://plus.google.com/share?url={url}",
             countUrl: ""
         },
-
         linkedin: {
             label: "Share",
             logo: "fa fa-linkedin",
             shareUrl: "https://www.linkedin.com/shareArticle?mini=true&url={url}",
-            countUrl: "https://www.linkedin.com/countserv/count/share?url=http://stylehatch.co&format=jsonp",
+            countUrl: "https://www.linkedin.com/countserv/count/share?url={url}&format=jsonp&callback=?",
             getCount: function (data) {
-                return data.count;
+                return data.count||0;
             }
         },
-
         pinterest: {
             label: "Pin it",
             logo: "fa fa-pinterest",
@@ -497,7 +509,6 @@
                 return data.count;
             }
         },
-
         stumbleupon: {
             label: "Share",
             logo: "fa fa-stumbleupon",
@@ -507,7 +518,6 @@
                 return data.result && data.result.views;
             }
         },
-
         telegram: {
             label: "Telegram",
             logo: "fa fa-telegram",
@@ -515,7 +525,6 @@
             countUrl: "",
             shareIn: "self"
         },
-
         whatsapp: {
             label: "WhatsApp",
             logo: "fa fa-whatsapp",
@@ -523,14 +532,12 @@
             countUrl: "",
             shareIn: "self"
         },
-
         line: {
             label: "LINE",
             logo: "fa fa-comment",
             shareUrl: "http://line.me/R/msg/text/?{text} {url}",
             countUrl: ""
         },
-
         viber: {
             label: "Viber",
             logo: "fa fa-volume-control-phone",
@@ -538,14 +545,12 @@
             countUrl: "",
             shareIn: "self"
         },
-
         pocket: {
             label: "Pocket",
             logo: "fa fa-get-pocket",
             shareUrl: "https://getpocket.com/save?url={url}&title={title}",
             countUrl: ""
         },
-
         messenger: {
             label: "Share",
             logo: "fa fa-commenting",
@@ -560,7 +565,6 @@
             countUrl: "",
             shareIn: "blank"
         },
-
         sms: {
             label: "SMS",
             logo: "fa fa-comments-o",

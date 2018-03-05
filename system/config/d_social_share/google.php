@@ -7,9 +7,10 @@ $_['d_social_share_google'] = array(
         //js-socials
         "share" => array(
             'label' => "",
-            'logo' => "fa fa-google-plus"
+            'logo' => "fa fa-google-plus",
         ),
         "sort_order" => 1,
+        'style_native' => false ,
         'icon' => 'fa-google-plus',
         "icon_position" => 'after',
         "text" => 'text_google',
