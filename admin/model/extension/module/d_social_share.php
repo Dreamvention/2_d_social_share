@@ -5,6 +5,8 @@
 
 class ModelExtensionModuleDSocialShare extends Model
 {
+    private $codename = 'd_social_share';
+
     public function installDatabase()
     {
 
@@ -12,6 +14,19 @@ class ModelExtensionModuleDSocialShare extends Model
 
     public function uninstallDatabase()
     {
+    }
+
+    public function init_state()
+    {
+        $this->config->load($this->codename);
+        $config = $this->config->get($this->codename);
+        //loading from config init data
+        $state = array();
+        $state['custom_url'] = $config['custom_url'];
+        $state['buttons'] = $this->loadButtons($this->codename);
+        $state['design'] = $config['design'];
+        $state['config'] = $config['config'];
+        return $state;
     }
 
     public function scan_dir($dir, &$arr_files)
@@ -86,7 +101,8 @@ class ModelExtensionModuleDSocialShare extends Model
         return $providers;
     }
 
-    public function escape($data){
+    public function escape($data)
+    {
         return $data;
     }
 

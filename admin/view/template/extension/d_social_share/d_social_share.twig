@@ -2,19 +2,12 @@
 <div id="content">
     <d_social_share></d_social_share>
 </div>
-
-<script src="view/template/extension/d_social_share/d_social_share.tag" type="riot/tag"></script>
-<script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
-
 <script>
     var state = {{ state|json_encode(constant('JSON_FORCE_OBJECT')) }};
-    riot.mixin({ store : d_security_module.createStore(state) })
+    riot.mixin({ store : d_social_share.createStore(state) })
     riot.mount('*')
-//    riot.mount('*');
 //    route.start(true);
 </script>
-
-
 {{ footer }}
 
 

@@ -45,7 +45,8 @@
         "d_twig_manager": ">= 1.5.0",
         "d_bootstrap_extra": ">= 1.0.1",
         "d_bootstrap_switch": ">= 3.3.5",
-        "d_bootstrap_colorpicker": ">= 2.5.1"
+        "d_bootstrap_colorpicker": ">= 2.5.1",
+        "d_riot": ">= 3.5.0"
     },
     "files": [
         "system/library/d_shopunity/extension/d_social_share.json",

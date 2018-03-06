@@ -1,5 +1,5 @@
 <?php
-$_['d_social_share_setting'] = array(
+$_['d_social_share'] = array(
     "status" => "1",
     'custom_url' => 'https://google.com/',// may be
     "buttons" => array(),
