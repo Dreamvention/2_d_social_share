@@ -4,7 +4,8 @@ var gulp           = require('gulp'),
     cleanCSS       = require('gulp-clean-css'),
     autoprefixer   = require('gulp-autoprefixer');
 
-var id_extension = 'd_social_login';
+var id_extension = 'd_social_share';
+
 gulp.task('browser-sync', function() {
     browserSync({
         proxy: "localhost",
@@ -13,12 +14,21 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('sass', function() {
-    return gulp.src('catalog/view/theme/default/stylesheet/d_social_share/styles.scss')
+    return gulp.src('catalog/view/theme/default/stylesheet/'+id_extension+'/styles.scss')
         .pipe(autoprefixer(['last 15 versions']))
         .pipe(sass().on('error', sass.logError))
         .pipe(cleanCSS())
         .pipe(gulp.dest('catalog/view/theme/default/stylesheet/d_social_share'))
-        .pipe(browserSync.reload({stream: true}))
+        .pipe(browserSync.reload({stream: true}));
+});
+// will compille styles in dark and light folders
+gulp.task('d_admin_style', function() {
+    return gulp.src('admin/view/stylesheet/d_admin_style/**/styles.scss')
+        .pipe(autoprefixer(['last 15 versions']))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('admin/view/stylesheet/d_admin_style/'))
+        .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('watch', ['sass', 'browser-sync'], function() {
