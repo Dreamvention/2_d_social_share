@@ -52,10 +52,21 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
         $this->document->addStyle('view/javascript/d_bootstrap_colorpicker/css/bootstrap-colorpicker.css');
         $this->document->addScript('view/javascript/d_bootstrap_colorpicker/js/bootstrap-colorpicker.js');
+
+        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css');
+
+        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css');
+//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css');
+//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css');
+//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-minima.css');
+//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css');
+
+        $this->document->addScript('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.js');
+//        $this->document->addScript('view/javascript/d_bootstrap_colorpicker/js/bootstrap-colorpicker.js');
         //  $this->document->addScript('view/javascript/d_tinysort/tinysort.js');
 //        $this->document->addScript('view/javascript/d_tinysort/jquery.tinysort.min.js');
 
-        $this->document->addStyle('view/stylesheet/'.$this->codename.'/styles.css');
+        $this->document->addStyle('view/stylesheet/' . $this->codename . '/styles.css');
 
         // Todo: place for style from admin_style.
         //        $this->document->addStyle('view/stylesheet/d_admin_style/core.css');
@@ -82,7 +93,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
 
         $this->document->setTitle($this->language->get('heading_title_main'));
-        
+
         if (isset($this->error['warning'])) {
             $data['error_warning'] = $this->error['warning'];
         } else {
@@ -203,13 +214,19 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['module_link'] = $this->model_extension_d_opencart_patch_url->ajax($this->route);
         // Navigation
         $state['navigation'] = array(
-            'buttons' => array('active' => True, 'href' => $state['module_link'].'#buttons', 'icon' => 'fa fa-tachometer', 'text' => $state['text_buttons'], 'disabled' => False),
-            'design'      => array('active' => False, 'href' => $state['module_link'].'#desing', 'icon' => 'fa fa-search', 'text' => $state['text_design'], 'disabled' => False),
-            'setting'   => array('active' => False, 'href' => $state['module_link'].'#setting', 'icon' => 'fa fa-cog', 'text' => $state['text_settings'], 'disabled' => False),
-            'help_me'   => array('active' => False, 'href' => $state['module_link'].'#help_me', 'icon' => 'fa fa-life-ring', 'text' => $state['text_help_me'], 'disabled' => False)
+            'buttons' => array('active' => True, 'href' => $state['module_link'] . '#buttons', 'icon' => 'fa fa-tachometer', 'text' => $state['text_buttons'], 'disabled' => False),
+            'design' => array('active' => False, 'href' => $state['module_link'] . '#desing', 'icon' => 'fa fa-search', 'text' => $state['text_design'], 'disabled' => False),
+            'setting' => array('active' => False, 'href' => $state['module_link'] . '#setting', 'icon' => 'fa fa-cog', 'text' => $state['text_settings'], 'disabled' => False),
+            'help_me' => array('active' => False, 'href' => $state['module_link'] . '#help_me', 'icon' => 'fa fa-life-ring', 'text' => $state['text_help_me'], 'disabled' => False)
         );
 
 
+        $state['styles_link'] = array(
+            'classic' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css',
+            'flat' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css',
+            'minimal' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-minima.css',
+            'plain' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css'
+        );
         $state['token'] = $this->model_extension_d_opencart_patch_user->getUrlToken();
         return $state;
     }

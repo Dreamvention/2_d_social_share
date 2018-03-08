@@ -1,7 +1,7 @@
 <?php
 $_['d_social_share_vkontakte'] = array(
     "vkontakte" => array(
-        "enabled" => true,
+        "enabled" => false,
         "keys" => array("id" => "", "secret" => ""),
         "id" => 'vkontakte',
         //js-socials

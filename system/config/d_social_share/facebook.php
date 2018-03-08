@@ -14,7 +14,7 @@ $_['d_social_share_facebook'] = array(
             "background_color" => '#3E5895',
             "background_color_active" => '#3E5895',
             "background_color_hover" => '#3E5895',
-            'native' => false,
+         //   'native' => false,
         ),
         "sort_order" => 1,
     )

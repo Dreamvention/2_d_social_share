@@ -36,8 +36,8 @@ $_['d_social_share'] = array(
         ),
         'placement' => 'normal',
         'placements' => array('normal', 'bottom', 'left', 'right'),
-        'rounded' => false,
-        'style' => 'custom',
+        'rounded' => true,
+        'style' => 'flat',
         'styles' => array(
             'flat',
             'classic',
@@ -54,7 +54,7 @@ $_['d_social_share'] = array(
     'config' => array(
         'text_to_share' => "Text to share",
         'showLabel' => false,
-        'showCount' => true,
+        'showCount' => false,
         'shareIn' => 'popup',
         'breakpoints' => array(
             'smallScreenWidth' => 640,

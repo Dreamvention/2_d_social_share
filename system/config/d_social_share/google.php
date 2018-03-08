@@ -14,7 +14,7 @@ $_['d_social_share_google'] = array(
             "background_color" => '#CE543D',
             "background_color_active" => '#CE543D',
             "background_color_hover" => '#CE543D',
-            'native' => false,
+//            'native' => false,
         ),
         "sort_order" => 1,
     )

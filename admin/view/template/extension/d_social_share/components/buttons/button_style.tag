@@ -1,5 +1,5 @@
 <shb_style>
-    <div class="shb_sltyle">
+    <div class="shb_style">
         <div class="text_color_picker">
             <div class="input-group color-picker {opts.button}_color" id="">
                 <label>{ state.text_color_text }</label>

@@ -138,19 +138,16 @@
                     {% for social , social_value in buttons %}
                     {
                         share: '{{ social_value.id }}',
-            {% for key, value in social_value.share %}
-            {{ key }}:
-            "{{ value }}",
+                        {% for key, value in social_value.share %}
+                        {{ key }}:"{{ value }}",
+                        {% endfor %}
+                        {% if social_value.style_native %}
+                        renderer:getNativeButton('{{ social_value.id }}'),
+                        {% endif %}
+                    },
                     {% endfor %}
-                    {% if social_value.style_native %}
-                renderer
-        :
-            getNativeButton('{{ social_value.id }}'),
-            {% endif %}
-        },
-            {% endfor %}
-        ]
-        })
+                ]
+                })
             ;//jsSocials
         });//document ready
     </script>

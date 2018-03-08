@@ -50,7 +50,7 @@
         self.state = self.store.getState();
         //enable button
         this.isLabeled = !self.state.design.rounded && self.state.config.showLabel;
-        this.isCustomStyle = self.state.design.style == 'custom';
+        this.isCustomStyle = self.state.design.style == 'custom' ;//|| self.state.design.style =='flat' feature
         labelChange = function (e) {
             self.state.buttons[e.item.i].share.label = e.target.value;
             self.store.updateState(['buttons'], self.state.buttons);

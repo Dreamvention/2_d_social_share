@@ -25,6 +25,7 @@ sh_button_info{
 .shb_logo {
   text-align: center;
   .fa {
+    font-size: 2rem;
     padding: 2rem;
     border: 1px solid rgba(0, 0, 0, .2); //todo apend logic with style
     border-radius: 4px;
@@ -35,7 +36,7 @@ sh_button_info{
 
 }
 
-.shb_sltyle {
+.shb_style {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -90,10 +91,15 @@ sh_button_info{
   position: relative;
 }
 .button_load{
-  top: 0;
+  text-align: center;
+  width: 100%;
+  top: -50%;
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
+}
+#d_social_share{
+  display: inline-block;
 }
 .show-wrap{
   min-height: 40px;
@@ -111,4 +117,11 @@ sh_button_info{
   transform-origin: 0% 0%;
   position: absolute;
   left: 50%;
+}
+.jssocials-shares{
+  display: flex;
+  align-items: center;
+}
+.jssocials-share-count-box{
+  background-color: #fff;
 }

@@ -16,7 +16,7 @@ $_['d_social_share_twitter'] = array(
             "background_color" => '#47AAEB',
             "background_color_active" => '#47AAEB',
             "background_color_hover" => '#47AAEB',
-            'native' => 1,
+         //   'native' => 1,
         ),
         "sort_order" => 1,
         )

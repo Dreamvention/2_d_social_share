@@ -14,7 +14,7 @@ $_['d_social_share_linkedin'] = array(
             "background_color" => '#0077B5',
             "background_color_active" => '#0077B5',
             "background_color_hover" => '#0077B5',
-            'native' => false,
+//            'native' => false,
         ),
         "sort_order" => 1,
     )
