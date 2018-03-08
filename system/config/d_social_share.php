@@ -37,7 +37,7 @@ $_['d_social_share'] = array(
         'placement' => 'normal',
         'placements' => array('normal', 'bottom', 'left', 'right'),
         'rounded' => false,
-        'style' => 'classic',
+        'style' => 'custom',
         'styles' => array(
             'flat',
             'classic',

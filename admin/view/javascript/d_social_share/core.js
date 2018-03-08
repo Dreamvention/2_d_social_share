@@ -119,22 +119,6 @@ var sm_core = (function() {
 
         return ignored;
     }
-
-    this.update_blink_state = function(status)
-    {
-        if (status == null) {
-            status = (this.stateCached.setting.config.main.two_factor_auth.status == 1) ? true : false;
-        }
-
-        if (status && !this.stateCached.setting.config.main.two_factor_auth.confirmed) {
-            this.stateCached.two_auth_blink = true;
-        } else {
-            this.stateCached.two_auth_blink = false;
-        }
-
-        this.updateState(['two_auth_blink'], this.stateCached.two_auth_blink);
-    }
-
     return this;
 })();
 

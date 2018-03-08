@@ -22,6 +22,24 @@ $_['entry_return_page_url']     = 'Enter the page url that will be used for a ne
 $_['entry_fields_sort_order']   = 'Sort and activate fields for the popup screen for the first Social Share action, which is the Social Share of a new customer. (email is not present because its activated by default) ';
 $_['text_display']              = 'Display';
 $_['text_require']              = 'Require';
+//navigation
+$_['text_buttons']              = 'Buttons';
+$_['text_design']              = 'Design';
+$_['text_settings']              = 'Settings';
+$_['text_help_me']              = 'Support';
+
+
+//buttons
+$_['text_button_label']         = 'Label';
+$_['text_button_icon']          = 'Icon';
+$_['text_colors']               = 'Button Colors';
+$_['text_color_text']           = 'Text color';
+$_['text_color_background_text']                    = 'Background ';
+$_['text_color_background_hover_text']              = 'Background hover';
+$_['text_color_background_active_text']             = 'Background active';
+$_['text_color_background_active_text']             = 'Background active';
+$_['text_native']             = 'Native: ';
+
 
 $_['text_not_found'] = '<div class="jumbotron">
           <h1>Please install Shopunity</h1>

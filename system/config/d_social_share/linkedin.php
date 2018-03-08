@@ -9,15 +9,13 @@ $_['d_social_share_linkedin'] = array(
             'label' => "Share",
             'logo' => "fa fa-linkedin"
         ),
+        'style' => array(
+            "color" => 'white',
+            "background_color" => '#0077B5',
+            "background_color_active" => '#0077B5',
+            "background_color_hover" => '#0077B5',
+            'native' => false,
+        ),
         "sort_order" => 1,
-        'style_native' => false ,
-        'icon' => 'fa-linkedin',
-        "icon_position" => 'after',
-        "text" => 'text_linkedin',
-        "title" => 'text_linkedin',
-        "color" => 'white',
-        "background_color" => '#0077B5',
-        "background_color_active" => '#0077B5',
-        "background_color_hover" => '#0077B5',
     )
 );

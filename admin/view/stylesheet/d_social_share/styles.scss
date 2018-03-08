@@ -1,0 +1,114 @@
+//buttons
+.buttons-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 1rem;
+}
+sh_button_info{
+  flex: 1 0 200px;
+  max-width: 25%;
+  min-width: 225px;
+
+}
+.sh_button_wrap {
+  text-align: center;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, .2); //todo apend logic with style
+  border-radius: 10px;
+}
+
+.shb_logo {
+  text-align: center;
+  .fa {
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, .2); //todo apend logic with style
+    border-radius: 4px;
+    &:hover {
+      border-color: #0b91d2;
+    }
+  }
+
+}
+
+.shb_sltyle {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  > *:not(:last-child) {
+    margin-right: 10px;
+  }
+  .input-group .form-control {
+    display: none;
+    position: absolute;
+  }
+  .input-group-addon, .input-group-btn {
+    padding: 0;
+    background: transparent;
+    border: none;
+    i {
+      display: block;
+      min-height: 35px;
+      width: 35px;
+      border: 1px solid rgba(0, 0, 0, .2);
+      border-radius: 100%;
+    }
+  }
+
+  .color-picker.colorpicker-element {
+    position: relative;
+    &:hover {
+      label {
+        max-width: 200%;
+        max-height: 100%;
+        overflow: visible;
+        border: 1px solid rgba(0, 0, 0, .2);
+        padding: .4rem;
+      }
+    }
+    label {
+      background: #fff;
+      border-radius: 4px;
+      transition: all .2s ease;
+      max-height: 0;
+      max-width: 0;
+      overflow: hidden;
+      font-size: 1rem;
+      position: absolute;
+      bottom: 100%;
+
+    }
+  }
+}
+//show room
+.show-buttons-wrap{
+  margin-top: 40px;
+  position: relative;
+}
+.button_load{
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+}
+.show-wrap{
+  min-height: 40px;
+  position: relative;
+  perspective: 200;
+  perspective-origin: 50% 50%;
+}
+.show-back-foot{
+  background: rgba(0, 0, 0, .2);
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  display: block;
+  transform: translateX(-50%) scaleZ(4.0) rotateX(5deg);
+  transform-origin: 0% 0%;
+  position: absolute;
+  left: 50%;
+}

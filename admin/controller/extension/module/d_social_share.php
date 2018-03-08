@@ -55,6 +55,8 @@ class ControllerExtensionModuleDSocialShare extends Controller
         //  $this->document->addScript('view/javascript/d_tinysort/tinysort.js');
 //        $this->document->addScript('view/javascript/d_tinysort/jquery.tinysort.min.js');
 
+        $this->document->addStyle('view/stylesheet/'.$this->codename.'/styles.css');
+
         // Todo: place for style from admin_style.
         //        $this->document->addStyle('view/stylesheet/d_admin_style/core.css');
         //        compiled riot tags and lib
@@ -124,6 +126,15 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['text_settings'] = $this->language->get('text_settings');
         $state['text_help_me'] = $this->language->get('text_help_me');
 
+        $state['text_button_label'] = $this->language->get('text_button_label');
+        $state['text_button_icon'] = $this->language->get('text_button_icon');
+        $state['text_colors'] = $this->language->get('text_colors');
+        $state['text_color_text'] = $this->language->get('text_color_text');
+        $state['text_color_background_text'] = $this->language->get('text_color_background_text');
+        $state['text_color_background_hover_text'] = $this->language->get('text_color_background_hover_text');
+        $state['text_color_background_active_text'] = $this->language->get('text_color_background_active_text');
+        $state['text_native'] = $this->language->get('text_native');
+
         $state['entry_name'] = $this->language->get('entry_name');
         $state['entry_description'] = $this->language->get('entry_description');
         $state['entry_status'] = $this->language->get('entry_status');
@@ -131,7 +142,9 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['button_save_and_stay'] = $this->language->get('button_save_and_stay');
         $state['button_save'] = $this->language->get('button_save');
         $state['button_cancel'] = $this->language->get('button_cancel');
+
         $state['version'] = $this->extension['version'];
+        $state['codename'] = $this->codename;
 
         $state['breadcrumbs'] = array();
 

@@ -12,9 +12,9 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div class="panel panel-default security_panel panel_top_radius">
+        <div class="panel panel-default panel_top_radius">
             <div class="panel-heading">
-                <h3 class="panel-title" >
+                <h3 class="panel-title">
                     <i class="fa fa-pencil"></i> {state.text_edit_module}
                 </h3>
             </div>
@@ -27,6 +27,7 @@
                 <sh_setting if={state.navigation.setting.active}></sh_setting>
                 <sh_help_me if={state.navigation.help_me.active}></sh_help_me>
 
+                <sh_show_room></sh_show_room>
             </div>
 
         </div>
@@ -36,10 +37,22 @@
         this.mixin({store: d_social_share});
         var self = this;
         self.state = this.store.getState();
+        self.on('mount', function () {
+            loadlibs();
+        })
+        self.on('updated', function () {
+            loadlibs();
+        });
         self.on('update', function () {
             self.state = self.store.getState();
         });
-
+        loadlibs = function () {
+            $("[type='checkbox']").bootstrapSwitch({
+                'onColor': 'success',
+                'onText': self.state.text_yes,
+                'offText': self.state.text_no,
+            });
+        }
         // BREADCRUMBS HELPER
     </script>
 

@@ -37,11 +37,14 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('admin/view/javascript/' + id_extension + '/compiled/'))
 });
 gulp.task('sass', function () {
-    return gulp.src('catalog/view/theme/default/stylesheet/' + id_extension + '/styles.scss')
+    // return gulp.src('catalog/view/theme/default/stylesheet/' + id_extension + '/styles.scss')
+    return gulp.src(        'admin/view/stylesheet/' + id_extension + '/styles.scss'
+    )
         .pipe(autoprefixer(['last 15 versions']))
         .pipe(sass().on('error', sass.logError))
         .pipe(cleanCSS())
-        .pipe(gulp.dest('catalog/view/theme/default/stylesheet/d_social_share'))
+        // .pipe(gulp.dest('catalog/view/theme/default/stylesheet/d_social_share'))
+        .pipe(gulp.dest('admin/view/stylesheet/'+id_extension))
         .pipe(browserSync.reload({stream: true}));
 });
 // will compille styles in dark and light folders
@@ -56,7 +59,7 @@ gulp.task('d_admin_style', function () {
 
 gulp.task('watch', ['riot', 'scripts', 'browser-sync'], function () {
     //wathc admin
-    gulp.watch('admin/view/stylesheet/'+id_extension+'/**/*.scss', ['sass']);
+    gulp.watch('admin/view/stylesheet/'+id_extension+'/*.scss', ['sass']);
     gulp.watch('admin/view/javascript/'+id_extension+'/**/*.js', ['scripts']);
     gulp.watch('admin/view/template/extension/'+id_extension+'/**/*.tag', ['riot']);
     //watch from

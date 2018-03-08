@@ -1,11 +1,9 @@
-<sh_breadcrumbs>
-    <ul class="breadcrumb">
-        <li each={el in state.breadcrumbs}>
-            <a href="{el.href}">{el.text}</a>
-        </li>
-    </ul>
-
+<shb_logo>
+    <div class="shb_logo" onclick="{changeIcon}"><i class="{opts.logo}"></i></div>
     <script>
+        changeIcon = function (e){
+
+        }
         this.mixin({store: d_social_share});
         var self = this;
         self.state = this.store.getState();
@@ -18,4 +16,4 @@
 
     </script>
 
-</sh_breadcrumbs>
+</shb_logo>

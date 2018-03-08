@@ -9,15 +9,13 @@ $_['d_social_share_google'] = array(
             'label' => "",
             'logo' => "fa fa-google-plus",
         ),
+        'style' => array(
+            "color" => 'white',
+            "background_color" => '#CE543D',
+            "background_color_active" => '#CE543D',
+            "background_color_hover" => '#CE543D',
+            'native' => false,
+        ),
         "sort_order" => 1,
-        'style_native' => false ,
-        'icon' => 'fa-google-plus',
-        "icon_position" => 'after',
-        "text" => 'text_google',
-        "title" => 'text_google',
-        "color" => 'white',
-        "background_color" => '#CE543D',
-        "background_color_active" => '#CE543D',
-        "background_color_hover" => '#CE543D',
     )
 );
