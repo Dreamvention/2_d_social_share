@@ -12,13 +12,6 @@
         </div>
     </div>
     <div class="container-fluid">
-
-
-        <h2>Example tab 2 (using standard nav-tabs)</h2>
-
-
-
-
         <div class="panel panel-default panel_top_radius">
             <div class="panel-heading">
                 <h3 class="panel-title">

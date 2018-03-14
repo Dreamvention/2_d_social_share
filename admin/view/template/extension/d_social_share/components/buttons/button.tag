@@ -26,7 +26,7 @@
                 <shb_logo logo="{button.share.logo}"></shb_logo>
 
             </div>
-            <div class="form-group" if="{isCustomStyle}">
+            <div class="form-group" if="{state.design.style=='flat'}">
                 <label for="">{state.text_colors}</label>
                 <shb_style styles="{button.style}" button="{i}"></shb_style>
             </div>
@@ -65,6 +65,9 @@
                 self.state.buttons[self.i].style.native = state;
                 self.store.updateState(['buttons'], self.state.buttons);
             });
+            this.isLabeled = !self.state.design.rounded && self.state.config.showLabel;
+            this.isCustomStyle = self.state.design.style == 'flat' ;//|| self.state.design.style =='flat' feature
+
         })
         self.on('update', function (e) {
             self.state = self.store.getState();
@@ -74,6 +77,9 @@
                 self.state.buttons[self.i].style.native = state;
                 self.store.updateState(['buttons'], self.state.buttons);
             });
+            this.isLabeled = !self.state.design.rounded && self.state.config.showLabel;
+            this.isCustomStyle = self.state.design.style == 'flat' ;//|| self.state.design.style =='flat' feature
+
             self.state = self.store.getState();
         });
         native = function () {

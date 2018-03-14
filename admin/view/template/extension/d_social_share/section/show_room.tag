@@ -5,7 +5,7 @@
             </div>
         </div>
         <div class="button_load">
-            <div id="{state.codename}"></div>
+            <div id="{state.codename}" ></div>
         </div>
     </div>
     <link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css" if="{state.design.style != 'custom'}">
@@ -25,33 +25,43 @@
         }
         function SetStyles() {
             this.sty = {
-                'border-radius': '50%'
+                'border-radius': self.state.design.rounded?'50%':'0',
+                'padding':self.state.design.sizes[self.state.design.size].padding,
+                'font-size':self.state.design.sizes[self.state.design.size]['font-size'],
             }
-            if (self.state.design.rounded)
-                $('.jssocials-share-link').css(this.sty);
-            for(var button_key in self.state.buttons) {
-                var button = self.state.buttons[button_key];
-                var className = '.jssocials-share-'+button.id+' .jssocials-share-link';
-                color = {
-                    'color':button.style.color,
-                    'background-color':button.style.background_color,
-                    'border-color':button.style.background_color
+            $('.jssocials-share-link').css(this.sty);
+
+            if (self.state.design.style == 'flat'){
+                for(var button_key in self.state.buttons) {
+                    var button = self.state.buttons[button_key];
+                    if (button.enabled){
+
+                    var className = '.jssocials-share-'+button.id+' .jssocials-share-link';
+                    color = {
+                        'color':button.style.color,
+                        'background-color':button.style.background_color,
+                        'border-color':button.style.background_color
+                    }
+                    $(className).css(color)
+                    var className = '.jssocials-share-'+button.id+' .jssocials-share-link:hover';
+                    console.log(className)
+                    console.log(color)
+                    color = {
+                        'color':button.style.color,
+                        'background-color':button.style.background_color_hover,
+                        'border-color':button.style.background_color_hover
+                    }
+                    $(className).css(color)
+                    var className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
+                    color = {
+                        'color':button.style.color,
+                        'background-color':button.style.background_color_active,
+                        'border-color':button.style.background_color_active
+                    }
+                    $(className).css(color)
+                    }
+
                 }
-                $(className).css(color)
-                var className = '.jssocials-share-'+button.id+' .jssocials-share-link:hover';
-                color = {
-                    'color':button.style.color,
-                    'background-color':button.style.background_color_hover,
-                    'border-color':button.style.background_color_hover
-                }
-                $(className).css(color)
-                var className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
-                color = {
-                    'color':button.style.color,
-                    'background-color':button.style.background_color_active,
-                    'border-color':button.style.background_color_active
-                }
-                $(className).css(color)
             }
         }
         getButtonsShares=function () {

@@ -35,7 +35,10 @@ class ModelExtensionModuleDSocialShare extends Model
         $text_sizes = array();
         $this->load->language($this->route);
         foreach ($config['design']['sizes'] as $key => $value ) {
-            $text_sizes[$key]=$this->language->get('text_'.$key);
+            $text_sizes['sizes'][$key]=$this->language->get('text_'.$key);
+        }
+        foreach ($config['design']['styles'] as $key => $value ) {
+            $text_sizes['styles'][$key]=$this->language->get('text_'.$key);
         }
         return $text_sizes;
 

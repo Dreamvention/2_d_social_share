@@ -146,6 +146,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['text_color_background_active_text'] = $this->language->get('text_color_background_active_text');
         $state['text_native'] = $this->language->get('text_native');
         $state['text_size'] = $this->language->get('text_size');
+        $state['text_rounded'] = $this->language->get('text_rounded');
 
         $state['entry_name'] = $this->language->get('entry_name');
         $state['entry_description'] = $this->language->get('entry_description');

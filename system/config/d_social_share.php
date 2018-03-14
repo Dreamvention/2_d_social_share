@@ -4,26 +4,26 @@ $_['d_social_share'] = array(
     'custom_url' => '',// may be
     "buttons" => array(),
     "design" => array(
-        'size' => 'medium',
+        'size' => 'huge',
         'sizes' => array(
             'extra_small' => array(
                 'padding' => '.4rem',
-                'font-size' => '1.2em'
+                'font-size' => '1.1em'
             ),
             'small' => array(
-                'padding' => '.6rem',
-                'font-size' => '1.6em'
+                'padding' => '.7rem',
+                'font-size' => '1.2em'
             ),
             'medium' => array(
-                'padding' => '.7rem',
-                'font-size' => '2rem'
+                'padding' => '1rem',
+                'font-size' => '1.8rem'
             ),
             'large' => array(
-                'padding' => '1rem',
-                'font-size' => '1.5rem'
+                'padding' => '1.2rem',
+                'font-size' => '2rem'
             ),
             'huge' => array(
-                'padding' => '2rem',
+                'padding' => '1.5rem',
                 'font-size' => '2.5rem'
             ),
             'custom'=>array()
@@ -31,12 +31,12 @@ $_['d_social_share'] = array(
         'placement' => 'normal',
         'placements' => array('normal', 'bottom', 'left', 'right'),
         'rounded' => true,
-        'style' => 'classic',
+        'style' => 'flat',
         'styles' => array(
-            'flat',
-            'classic',
-            'minimal',
-            'plain',
+            'flat'=>array(),
+            'classic'=>array(),
+            'minimal'=>array(),
+            'plain'=>array(),
             'custom' => array(
                 'jssocials-shares'=>'',
                 'jssocials-share'=>'',
@@ -48,7 +48,7 @@ $_['d_social_share'] = array(
     'config' => array(
         'text_to_share' => "Text to share",
         'showLabel' => false,
-        'showCount' => true,
+        'showCount' => false,
         'shareIn' => 'popup',
         'breakpoints' => array(
             'smallScreenWidth' => 640,

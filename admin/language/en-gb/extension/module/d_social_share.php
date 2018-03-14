@@ -26,6 +26,8 @@ $_['text_buttons'] = 'Buttons';
 $_['text_design'] = 'Design';
 $_['text_settings'] = 'Settings';
 $_['text_help_me'] = 'Support';
+
+//Design
 //text sizes
 $_['text_size'] = 'Sizes';
 $_['text_extra_small'] = 'Extra Small';
@@ -34,6 +36,13 @@ $_['text_medium'] = 'Medium';
 $_['text_large'] = 'Large';
 $_['text_huge'] = 'Huge';
 $_['text_custom'] = 'Custom';
+//style
+$_['text_flat'] = 'Flat';
+$_['text_classic'] = 'Classic';
+$_['text_minimal'] = 'Minimal';
+$_['text_plain'] = 'Plain';
+
+$_['text_rounded'] = 'Round / Square';
 
 
 //buttons
