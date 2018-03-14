@@ -9,6 +9,7 @@
         </div>
     </div>
     <link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css" if="{state.design.style != 'custom'}">
+
     <script>
         function getButtons(){
             $("#"+ self.state.codename ).jsSocials({

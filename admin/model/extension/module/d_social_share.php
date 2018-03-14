@@ -6,6 +6,7 @@
 class ModelExtensionModuleDSocialShare extends Model
 {
     private $codename = 'd_social_share';
+    private $route = 'extension/module/d_social_share';
 
     public function installDatabase()
     {
@@ -16,7 +17,7 @@ class ModelExtensionModuleDSocialShare extends Model
     {
     }
 
-    public function init_state()
+    public function initState()
     {
         $this->config->load($this->codename);
         $config = $this->config->get($this->codename);
@@ -27,6 +28,17 @@ class ModelExtensionModuleDSocialShare extends Model
         $state['design'] = $config['design'];
         $state['config'] = $config['config'];
         return $state;
+    }
+    public function getTextField(){
+        $this->config->load($this->codename);
+        $config = $this->config->get($this->codename);
+        $text_sizes = array();
+        $this->load->language($this->route);
+        foreach ($config['design']['sizes'] as $key => $value ) {
+            $text_sizes[$key]=$this->language->get('text_'.$key);
+        }
+        return $text_sizes;
+
     }
 
     public function scan_dir($dir, &$arr_files)

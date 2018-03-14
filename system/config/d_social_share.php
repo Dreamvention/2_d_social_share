@@ -1,10 +1,10 @@
 <?php
 $_['d_social_share'] = array(
     "status" => "1",
-    'custom_url' => 'https://google.com/',// may be
+    'custom_url' => '',// may be
     "buttons" => array(),
     "design" => array(
-        'size' => 'small',
+        'size' => 'medium',
         'sizes' => array(
             'extra_small' => array(
                 'padding' => '.4rem',
@@ -26,18 +26,12 @@ $_['d_social_share'] = array(
                 'padding' => '2rem',
                 'font-size' => '2.5rem'
             ),
-        ),
-        'text_sizes' => array(
-            'extra_small' => 'text_extra_small',
-            'small' => 'text_small',
-            'medium' => 'text_medium',
-            'large' => 'text_large',
-            'huge' => 'text_huge',
+            'custom'=>array()
         ),
         'placement' => 'normal',
         'placements' => array('normal', 'bottom', 'left', 'right'),
         'rounded' => true,
-        'style' => 'flat',
+        'style' => 'classic',
         'styles' => array(
             'flat',
             'classic',
@@ -54,7 +48,7 @@ $_['d_social_share'] = array(
     'config' => array(
         'text_to_share' => "Text to share",
         'showLabel' => false,
-        'showCount' => false,
+        'showCount' => true,
         'shareIn' => 'popup',
         'breakpoints' => array(
             'smallScreenWidth' => 640,

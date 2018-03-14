@@ -1,5 +1,4 @@
 <sh_button_info>
-
     <div class="sh_button_wrap">
         <div class="sh_title page-header">
             <h3>{this.i}</h3>
@@ -9,6 +8,7 @@
                     <input type="hidden" name="" value="0"/>
                     <input type="checkbox" name="{state.codename}_setting[buttons][enable]" class="switcher"
                            id="{this.i}"
+                           data-size="mini"
                            data-label-text="{ state.text_enabled }"
                            checked="{button.enabled ? 'checked':''}"
                            value="1"/>
@@ -30,7 +30,7 @@
                 <label for="">{state.text_colors}</label>
                 <shb_style styles="{button.style}" button="{i}"></shb_style>
             </div>
-            <div class="form-group">
+            <div class="form-group" if="{!(typeof (button.style.native) === 'undefined')}">
             <span class="sh_button_native" if="{!(typeof (button.style.native) === 'undefined')}">
                 <label for="">{state.text_native}</label>
                     <input type="hidden" name="" value="0"/>
@@ -50,7 +50,7 @@
         self.state = self.store.getState();
         //enable button
         this.isLabeled = !self.state.design.rounded && self.state.config.showLabel;
-        this.isCustomStyle = self.state.design.style == 'custom' ;//|| self.state.design.style =='flat' feature
+        this.isCustomStyle = self.state.design.style == 'flat' ;//|| self.state.design.style =='flat' feature
         labelChange = function (e) {
             self.state.buttons[e.item.i].share.label = e.target.value;
             self.store.updateState(['buttons'], self.state.buttons);
@@ -83,6 +83,7 @@
             });
         }
     </script>
+
 </sh_button_info>
 
 

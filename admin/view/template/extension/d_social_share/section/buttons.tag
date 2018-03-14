@@ -4,7 +4,7 @@
         <div class="buttons-wrap">
             <sh_button_info each="{button,i in state.buttons}"></sh_button_info>
         </div>
-
+    </div>
 
     <script>
         this.mixin({store: d_social_share});

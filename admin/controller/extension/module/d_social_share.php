@@ -122,7 +122,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
     public function load_state()
     {
-        $state = $this->model_extension_module_d_social_share->init_state();
+        $state = $this->model_extension_module_d_social_share->initState();
         $state['heading_title'] = $this->language->get('heading_title_main');
 
         $state['text_edit'] = $this->language->get('text_edit');
@@ -145,6 +145,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['text_color_background_hover_text'] = $this->language->get('text_color_background_hover_text');
         $state['text_color_background_active_text'] = $this->language->get('text_color_background_active_text');
         $state['text_native'] = $this->language->get('text_native');
+        $state['text_size'] = $this->language->get('text_size');
 
         $state['entry_name'] = $this->language->get('entry_name');
         $state['entry_description'] = $this->language->get('entry_description');
@@ -227,6 +228,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
             'minimal' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-minima.css',
             'plain' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css'
         );
+        $state['text'] = $this->model_extension_module_d_social_share->getTextField();
         $state['token'] = $this->model_extension_d_opencart_patch_user->getUrlToken();
         return $state;
     }

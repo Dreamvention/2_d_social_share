@@ -12,6 +12,13 @@
         </div>
     </div>
     <div class="container-fluid">
+
+
+        <h2>Example tab 2 (using standard nav-tabs)</h2>
+
+
+
+
         <div class="panel panel-default panel_top_radius">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -21,11 +28,21 @@
 
             <div class="panel-body">
                 <sh_navigation></sh_navigation>
+                    <div class="tab-content ">
+                        <div class="tab-pane" id="nav_buttons">
+                            <sh_buttons></sh_buttons>
+                        </div>
+                        <div class="tab-pane active" id="nav_design">
+                            <sh_design></sh_design>
+                        </div>
+                        <div class="tab-pane" id="nav_setting">
+                            <sh_setting></sh_setting>
+                        </div>
+                        <div class="tab-pane" id="nav_help_me">
+                            <sh_help_me></sh_help_me>
+                        </div>
+                </div>
                 <hr>
-                <sh_buttons if={state.navigation.buttons.active}></sh_buttons>
-                <sh_design if={state.navigation.design.active}></sh_design>
-                <sh_setting if={state.navigation.setting.active}></sh_setting>
-                <sh_help_me if={state.navigation.help_me.active}></sh_help_me>
 
                 <sh_show_room></sh_show_room>
             </div>

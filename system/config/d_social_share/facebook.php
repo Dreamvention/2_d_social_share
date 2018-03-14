@@ -10,7 +10,7 @@ $_['d_social_share_facebook'] = array(
             "logo" => 'fa fa-facebook',
         ),
         'style' => array(
-            "color" => 'red',
+            "color" => 'white',
             "background_color" => '#3E5895',
             "background_color_active" => '#3E5895',
             "background_color_hover" => '#3E5895',

@@ -8,16 +8,15 @@
 sh_button_info{
   flex: 1 0 200px;
   max-width: 25%;
-  min-width: 225px;
-
+  min-width: 125px;
 }
 .sh_button_wrap {
   text-align: center;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  padding-bottom: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  padding-right: .7rem;
+  padding-left: .7rem;
+  padding-bottom: .7rem;
+  margin-right: .7rem;
+  margin-bottom: .7rem;
   border: 1px solid rgba(0, 0, 0, .2); //todo apend logic with style
   border-radius: 10px;
 }
@@ -26,7 +25,7 @@ sh_button_info{
   text-align: center;
   .fa {
     font-size: 2rem;
-    padding: 2rem;
+    padding: 1.2rem;
     border: 1px solid rgba(0, 0, 0, .2); //todo apend logic with style
     border-radius: 4px;
     &:hover {
@@ -124,4 +123,10 @@ sh_button_info{
 }
 .jssocials-share-count-box{
   background-color: #fff;
+}
+.tab-content .tab-pane.active{
+  display: block;
+}
+.tab-content .tab-pane{
+  display: none;
 }
