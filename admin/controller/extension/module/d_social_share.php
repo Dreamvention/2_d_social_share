@@ -24,12 +24,10 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
     public function index()
     {
-
         if ($this->d_shopunity) {
             $this->load->model('extension/d_shopunity/mbooth');
             $this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
         }
-
         if ($this->d_twig_manager) {
             $this->load->model('extension/module/d_twig_manager');
             if (!$this->model_extension_module_d_twig_manager->isCompatible()) {
@@ -147,6 +145,15 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['text_native'] = $this->language->get('text_native');
         $state['text_size'] = $this->language->get('text_size');
         $state['text_rounded'] = $this->language->get('text_rounded');
+        $state['text_style'] = $this->language->get('text_style');
+        $state['text_show_label'] = $this->language->get('text_show_label');
+        $state['text_show_count'] = $this->language->get('text_show_count');
+        $state['text_shareIn'] = $this->language->get('text_shareIn');
+        $state['text_breakpoints'] = $this->language->get('text_breakpoints');
+        $state['text_smallScreenWidth'] = $this->language->get('text_smallScreenWidth');
+        $state['text_largeScreenWidth'] = $this->language->get('text_largeScreenWidth');
+
+        $state['text_custom_url'] = $this->language->get('text_custom_url');
 
         $state['entry_name'] = $this->language->get('entry_name');
         $state['entry_description'] = $this->language->get('entry_description');
@@ -233,8 +240,12 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['token'] = $this->model_extension_d_opencart_patch_user->getUrlToken();
         return $state;
     }
-
-
+public function save_setting(){
+        return $this->index();
+}
+public function validate(){
+        return true;
+}
     public function install()
     {
         if ($this->d_shopunity) {

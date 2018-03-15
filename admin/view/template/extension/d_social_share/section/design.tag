@@ -17,7 +17,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-sm-2">
-                <label>{state.text_size}</label>
+                <label>{state.text_style}</label>
             </div>
             <div class="col-sm-10">
                 <select class="form-control" onchange="{this.changeStyles}" name="{state.codename}_setting[design][style]">
@@ -27,7 +27,8 @@
                     </option>
                 </select>
             </div>
-        </div></div>
+        </div>
+    </div>
 
     <div class="form-group">
             <div class="row">

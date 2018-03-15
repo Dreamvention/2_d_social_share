@@ -26,27 +26,27 @@ $_['d_social_share'] = array(
                 'padding' => '1.5rem',
                 'font-size' => '2.5rem'
             ),
-            'custom'=>array()
+            'custom' => array()
         ),
         'placement' => 'normal',
         'placements' => array('normal', 'bottom', 'left', 'right'),
         'rounded' => true,
         'style' => 'flat',
         'styles' => array(
-            'flat'=>array(),
-            'classic'=>array(),
-            'minimal'=>array(),
-            'plain'=>array(),
+            'flat' => array(),
+            'classic' => array(),
+            'minimal' => array(),
+            'plain' => array(),
             'custom' => array(
-                'jssocials-shares'=>'',
-                'jssocials-share'=>'',
-                'jssocials-share-count-box'=>'',
-                'jssocials-share-no-count'=>''
+                'jssocials-shares' => '',
+                'jssocials-share' => '',
+                'jssocials-share-count-box' => '',
+                'jssocials-share-no-count' => ''
             ),
         ),
     ),
     'config' => array(
-        'text_to_share' => "Text to share",
+        'text_to_share' => array(1 => "Text to share"),
         'showLabel' => false,
         'showCount' => false,
         'shareIn' => 'popup',
@@ -54,6 +54,7 @@ $_['d_social_share'] = array(
             'smallScreenWidth' => 640,
             'largeScreenWidth' => 1024
         ),
+        'shareIns'=>array('blank','popup','self'),
         'popup_size' => array(
             'width' => '200px',
             'height' => '300px'

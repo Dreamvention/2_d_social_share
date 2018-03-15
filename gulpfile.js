@@ -26,6 +26,8 @@ gulp.task('scripts', function () {
     return gulp.src([
 //        'admin/view/javascript/'+id_extension+'/library/alertify/alertify.min.js',
         'admin/view/javascript/' + id_extension + '/library/immutable/immutable.min.js',
+        'admin/view/javascript/'+id_extension+'/library/serializejson/jquery.serializejson.min.js',
+
         'admin/view/javascript/d_riot/riot.min.js',// есть новее
         // 'admin/view/javascript/d_riot/'+id_extension+'/library/riot/route/route_plus_tag.min.js',
         'admin/view/javascript/' + id_extension + '/core.js',

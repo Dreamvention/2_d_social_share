@@ -124,3 +124,30 @@ var sm_core = (function() {
 
 // ALIAS
 var d_social_share = sm_core;
+
+// SETTING
+
+(function(){
+
+    this.subscribe('setting/save_setting', function(data) {
+
+        var go = data.go;
+        delete data.go;
+        var send_data = {
+            'setting': JSON.stringify(data)
+        };
+console.log(this.getToken())
+        $.post('index.php?route=extension/module/d_social_share/save_setting&' + this.getToken(), send_data, function(json) {
+
+            if (typeof json === 'string') {
+                json = this.try_parse_json(json);
+            }
+
+            if (json) {
+                this.notification_handler(json);
+            }
+
+        }.bind(this));
+
+    });
+})(sm_core);

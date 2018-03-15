@@ -23,46 +23,49 @@
                 shares: getButtonsShares()
             })
         }
-        function SetStyles() {
-            this.sty = {
-                'border-radius': self.state.design.rounded?'50%':'0',
-                'padding':self.state.design.sizes[self.state.design.size].padding,
-                'font-size':self.state.design.sizes[self.state.design.size]['font-size'],
+        function addClass(className,classValues) {
+            styleContainer =className+'{';
+            for (key in classValues){
+                styleContainer+=key+':'+classValues[key]+';'
             }
-            $('.jssocials-share-link').css(this.sty);
-
+            styleContainer +='}';
+            return  styleContainer;
+        }
+        function SetStyles() {
+            $('html > head').find('[title="d_social_share"]').remove();
+            var style = '<style title="d_social_share">';//'</style>'
+            style += addClass('.jssocials-share-link',
+                {
+                    'border-radius': self.state.design.rounded?'50% !important':'0',
+                    'padding':self.state.design.sizes[self.state.design.size].padding+" !important",
+                    'font-size':self.state.design.sizes[self.state.design.size]['font-size'],
+                }
+            )
             if (self.state.design.style == 'flat'){
                 for(var button_key in self.state.buttons) {
                     var button = self.state.buttons[button_key];
                     if (button.enabled){
-
-                    var className = '.jssocials-share-'+button.id+' .jssocials-share-link';
-                    color = {
-                        'color':button.style.color,
-                        'background-color':button.style.background_color,
-                        'border-color':button.style.background_color
+                        var className = '.jssocials-share-'+button.id+' .jssocials-share-link';
+                        color = {
+                            'color':button.style.color,
+                            'background-color':button.style.background_color+'!important',
+                            'border-color':button.style.background_color+'!important'
+                        }
+                        style += addClass(className,color)
+                        className = '.jssocials-share-'+button.id+' .jssocials-share-link:hover';
+                        color_hover = {
+                            'color':button.style.color,
+                            'background-color':button.style.background_color_hover+'!important',
+                            'border-color':button.style.background_color_hover+'!important'
+                        }
+                        style += addClass(className,color_hover)
+                    // var className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
                     }
-                    $(className).css(color)
-                    var className = '.jssocials-share-'+button.id+' .jssocials-share-link:hover';
-                    console.log(className)
-                    console.log(color)
-                    color = {
-                        'color':button.style.color,
-                        'background-color':button.style.background_color_hover,
-                        'border-color':button.style.background_color_hover
-                    }
-                    $(className).css(color)
-                    var className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
-                    color = {
-                        'color':button.style.color,
-                        'background-color':button.style.background_color_active,
-                        'border-color':button.style.background_color_active
-                    }
-                    $(className).css(color)
-                    }
-
                 }
             }
+            style+='</style>'
+            var $style = $(style)
+            $('html > head').append($style);
         }
         getButtonsShares=function () {
             var buttons = [];

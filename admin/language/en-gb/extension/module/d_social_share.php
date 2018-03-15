@@ -43,6 +43,24 @@ $_['text_minimal'] = 'Minimal';
 $_['text_plain'] = 'Plain';
 
 $_['text_rounded'] = 'Round / Square';
+$_['text_style'] = 'Style';
+
+
+
+//settings
+$_['text_custom_url'] = 'Custom Url ';
+
+$_['text_show_label'] = 'Show Label';
+$_['text_show_count'] = 'Show Count';
+$_['text_shareIn'] = 'Share type';
+
+$_['text_blank'] = 'style';
+$_['text_popup'] = 'style';
+$_['text_self'] = 'style';
+
+$_['text_breakpoints'] = 'Breakpoints';
+$_['text_smallScreenWidth'] = 'Small screen width';
+$_['text_largeScreenWidth'] = 'Large screen width';
 
 
 //buttons
