@@ -1,10 +1,10 @@
 <?php
 $_['d_social_share'] = array(
     "status" => "1",
-    'custom_url' => '',// may be
+    'custom_url' => 'google.com',// may be
     "buttons" => array(),
     "design" => array(
-        'size' => 'huge',
+        'size' => 'medium',
         'sizes' => array(
             'extra_small' => array(
                 'padding' => '.4rem',

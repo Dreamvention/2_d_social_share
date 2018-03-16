@@ -1,9 +1,5 @@
-<sh_buttons>
-        <h3>{state.text_buttons}</h3>
-        <div class="buttons-wrap">
-            <sh_button_info each="{button,i in state.buttons}"></sh_button_info>
-        </div>
-    </div>
+<sh_help_me>
+    <h3 >{state.text_help_me}</h3>
 
     <script>
         this.mixin({store: d_social_share});
@@ -13,5 +9,4 @@
             self.state = self.store.getState();
         });
     </script>
-
-</sh_buttons>
+</sh_help_me>

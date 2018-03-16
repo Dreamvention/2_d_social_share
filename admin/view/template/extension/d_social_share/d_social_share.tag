@@ -5,7 +5,6 @@
                 <button onclick={save_setting} data-go="0" id="save_and_stay" data-toggle="tooltip" title="{state.button_save_and_stay}" class="btn btn-success"><i class="fa fa-save"></i></button>
                 <button onclick={save_setting} data-go="1" id="save" data-toggle="tooltip" title="{state.button_save}" class="btn btn-primary"><i class="fa fa-save"></i></button>
                 <a href="{state.cancel}" data-toggle="tooltip" title="{state.button_cancel}" class="btn btn-default" id="cancel-button"><i class="fa fa-reply"></i></a>
-
             </div>
             <h1>{state.heading_title } {state.version }</h1>
             <sh_breadcrumbs></sh_breadcrumbs>
@@ -15,21 +14,49 @@
         <div class="panel panel-default panel_top_radius">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="fa fa-pencil"></i> {state.text_edit_module}
+                    <i class="fa fa-pencil"></i> {state.text_edit}
                 </h3>
+                <div class="form-group" if="{state.name}">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>{state.text_name}</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input class="form-control" onchange="{this.changeName}"
+                                   name="{state.codename}_setting[name]" value="{state.name}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label>{state.text_status}</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <span class="sh_button_enable">
+                                <input type="hidden" name="" value="0"/>
+                                <input type="checkbox" name="{state.codename}_setting[status]" class="switcher"
+                                data-label-text="{ state.text_enabled }"
+                                checked="{state.status ? 'checked':''}"
+                                id="status"
+                                value="1" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body" if="{state.status}">
                 <sh_navigation></sh_navigation>
                 <form id="setting_form" action="">
                     <div class="tab-content ">
-                        <div class="tab-pane" id="nav_buttons">
+                        <div class="tab-pane active" id="nav_buttons">
                             <sh_buttons></sh_buttons>
                         </div>
                         <div class="tab-pane " id="nav_design">
                             <sh_design></sh_design>
                         </div>
-                        <div class="tab-pane active" id="nav_setting">
+                        <div class="tab-pane " id="nav_setting">
                             <sh_settings></sh_settings>
                         </div>
                         <div class="tab-pane" id="nav_help_me">
@@ -50,13 +77,29 @@
         save_setting(e) {
             e.preventDefault = true;
             var go = parseInt(e.currentTarget.getAttribute('data-go'));
-            data_={"d_social_share_setting":{"custom_ulr":this.state.custom_url,"buttons":this.state.buttons,"design":this.state.design,"config":this.state.config}}
+            data_={
+                "d_social_share_setting":{
+                    "custom_ulr":this.state.custom_url,
+                    "buttons":this.state.buttons,
+                    "design":this.state.design,
+                    "config":this.state.config
+                },
+                "status":this.state.status,
+            }
+            if (this.state.name){
+                data_.name=this.state.name;
+            }
             self.store.dispatch('setting/save_setting', data_);
             if (go == 1) { $(location).attr('href', this.state.cancel); }
         }
         self.state = this.store.getState();
         self.on('mount', function () {
             loadlibs();
+            $('#status').on('switchChange.bootstrapSwitch', function (e, state) {
+                self.state.status= state;
+                self.store.updateState(['status'], self.state.status);
+            })
+
         })
         self.on('updated', function () {
             loadlibs();
@@ -71,7 +114,6 @@
                 'offText': self.state.text_no,
             });
         }
-        // BREADCRUMBS HELPER
     </script>
 
 </d_social_share>

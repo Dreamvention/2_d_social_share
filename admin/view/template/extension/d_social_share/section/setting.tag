@@ -1,4 +1,5 @@
 <sh_settings>
+    <h3 >{state.text_settings}</h3>
     <div class="form-group">
         <div class="row">
             <div class="col-sm-2">
@@ -6,14 +7,14 @@
             </div>
             <div class="col-sm-10">
                 <input class="form-control" onchange="{this.changeCustom}"
-                        name="{state.codename}_setting[custom_url]" />
+                       name="{state.codename}_setting[custom_url]" value="{state.custom_url}"/>
             </div>
         </div>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col-sm-2">
-                <label>{state.text_style}</label>
+                <label>{state.text_style_share}</label>
             </div>
             <div class="col-sm-10">
                 <select class="form-control" onchange="{this.changeShareIn}"
@@ -79,7 +80,6 @@
             $('#showCount').on('switchChange.bootstrapSwitch', function (e, state) {
                 self.state.config.showCount = state;
                 self.store.updateState(['config'], self.state.config);
-
             })
             $('#showLabel').on('switchChange.bootstrapSwitch', function (e, state) {
                 self.state.config.showLabel = state;

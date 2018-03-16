@@ -29,6 +29,9 @@ class ModelExtensionModuleDSocialShare extends Model
         $state['config'] = $config['config'];
         return $state;
     }
+    public function getName(){
+//        return .(($this->db->getLastId()!=0)?$this->db->getLastId():$this->codename."_"$this->db->getLastId()+1);
+    }
     public function getTextField(){
         $this->config->load($this->codename);
         $config = $this->config->get($this->codename);

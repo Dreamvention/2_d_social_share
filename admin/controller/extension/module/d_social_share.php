@@ -71,24 +71,6 @@ class ControllerExtensionModuleDSocialShare extends Controller
         //        compiled riot tags and lib
         $this->document->addScript('view/javascript/' . $this->codename . '/compiled/core_and_libs.min.js');
         $this->document->addScript('view/template/extension/' . $this->codename . '/compiled/compiled.js');
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-
-            $config[$this->codename . '_setting'] = $this->config->get($this->codename);
-
-            if (!isset($this->request->get['module_id'])) {
-                $this->model_extension_d_opencart_patch_module->addModule($this->codename, $this->request->post);
-                $this->request->get['module_id'] = $this->db->getLastId();
-            }
-            $this->request->post['module_id'] = $this->request->get['module_id'];
-
-            $this->model_extension_d_opencart_patch_module->editModule($this->request->get['module_id'], $this->request->post);
-
-            $this->session->data['success'] = $this->language->get('text_success');
-
-            $this->response->redirect($this->model_extension_d_opencart_patch_url->link('marketplace/extension', 'type=module'));
-        }
-        $this->load->language($this->route);
-
 
         $this->document->setTitle($this->language->get('heading_title_main'));
 
@@ -124,6 +106,8 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['heading_title'] = $this->language->get('heading_title_main');
 
         $state['text_edit'] = $this->language->get('text_edit');
+        $state['text_status'] = $this->language->get('text_status');
+        $state['text_name'] = $this->language->get('text_name');
         $state['text_enabled'] = $this->language->get('text_enabled');
         $state['text_disabled'] = $this->language->get('text_disabled');
         $state['text_important'] = $this->language->get('text_important');
@@ -142,10 +126,12 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['text_color_background_text'] = $this->language->get('text_color_background_text');
         $state['text_color_background_hover_text'] = $this->language->get('text_color_background_hover_text');
         $state['text_color_background_active_text'] = $this->language->get('text_color_background_active_text');
+
         $state['text_native'] = $this->language->get('text_native');
         $state['text_size'] = $this->language->get('text_size');
         $state['text_rounded'] = $this->language->get('text_rounded');
         $state['text_style'] = $this->language->get('text_style');
+        $state['text_style_share'] = $this->language->get('text_style_share');
         $state['text_show_label'] = $this->language->get('text_show_label');
         $state['text_show_count'] = $this->language->get('text_show_count');
         $state['text_shareIn'] = $this->language->get('text_shareIn');
@@ -200,11 +186,12 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['get_cancel'] = $this->model_extension_d_opencart_patch_url->getExtensionAjax('module');
         $state['module_link'] = $this->model_extension_d_opencart_patch_url->link($this->route);
 
-        if (isset($this->request->get['module_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+        if (isset($this->request->get['module_id']) ) {
             $module_info = $this->model_extension_d_opencart_patch_module->getModule($this->request->get['module_id']);
+        }
+        if (isset($this->request->get['module_id'])){
             $state['module_id'] = $this->request->get['module_id'];
         }
-
         if (isset($this->request->post['name'])) {
             $state['name'] = $this->request->post['name'];
         } elseif (!empty($module_info)) {
@@ -218,13 +205,13 @@ class ControllerExtensionModuleDSocialShare extends Controller
         } elseif (!empty($module_info)) {
             $state['status'] = $module_info['status'];
         } else {
-            $state['status'] = '';
+            $state['status'] = false;
         }
         $state['module_link'] = $this->model_extension_d_opencart_patch_url->ajax($this->route);
         // Navigation
         $state['navigation'] = array(
             'buttons' => array('active' => True, 'href' => $state['module_link'] . '#buttons', 'icon' => 'fa fa-tachometer', 'text' => $state['text_buttons'], 'disabled' => False),
-            'design' => array('active' => False, 'href' => $state['module_link'] . '#desing', 'icon' => 'fa fa-search', 'text' => $state['text_design'], 'disabled' => False),
+            'design'  => array('active' => False, 'href' => $state['module_link'] . '#desing', 'icon' => 'fa fa-search', 'text' => $state['text_design'], 'disabled' => False),
             'setting' => array('active' => False, 'href' => $state['module_link'] . '#setting', 'icon' => 'fa fa-cog', 'text' => $state['text_settings'], 'disabled' => False),
             'help_me' => array('active' => False, 'href' => $state['module_link'] . '#help_me', 'icon' => 'fa fa-life-ring', 'text' => $state['text_help_me'], 'disabled' => False)
         );
@@ -232,20 +219,48 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
         $state['styles_link'] = array(
             'classic' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css',
-            'flat' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css',
+            'flat'    => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css',
             'minimal' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-minima.css',
-            'plain' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css'
+            'plain'   => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css'
         );
         $state['text'] = $this->model_extension_module_d_social_share->getTextField();
         $state['token'] = $this->model_extension_d_opencart_patch_user->getUrlToken();
         return $state;
     }
-public function save_setting(){
-        return $this->index();
-}
-public function validate(){
+
+    public function save_setting()
+    {
+        $json = array();
+        $this->load->model('setting/setting');
+        $this->load->model('extension/d_opencart_patch/url');
+        $this->load->model('extension/d_opencart_patch/module');
+        $this->session->data['success'] = $this->language->get('text_success');
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+            if (!isset($this->request->get['module_id'])) {
+                $this->request->post['setting']['name']=$this->model_extension_module_d_social_share->getName();
+                $this->model_extension_d_opencart_patch_module->addModule($this->codename, $this->request->post['setting']);
+                $this->request->get['module_id'] = $this->db->getLastId();
+            }else{
+                $this->model_extension_d_opencart_patch_module->editModule($this->request->get['module_id'], $this->request->post['setting']);
+            }
+            $this->session->data['success'] = $this->language->get('text_success');
+            $url='';
+            if (isset($this->request->get['module_id'])) {
+                $url .= '&module_id='.$this->request->get['module_id'];
+            }
+            $json['redirect'] = str_replace('&amp;', '&', $this->model_extension_d_opencart_patch_url->link($this->route, $url));
+            $json['success'] = 'success';
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode($json));
+        }
+
+    }
+
+    public function validate()
+    {
         return true;
-}
+    }
+
     public function install()
     {
         if ($this->d_shopunity) {

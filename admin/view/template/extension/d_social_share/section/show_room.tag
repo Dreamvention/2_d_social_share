@@ -39,8 +39,7 @@
                     'border-radius': self.state.design.rounded?'50% !important':'0',
                     'padding':self.state.design.sizes[self.state.design.size].padding+" !important",
                     'font-size':self.state.design.sizes[self.state.design.size]['font-size'],
-                }
-            )
+                })
             if (self.state.design.style == 'flat'){
                 for(var button_key in self.state.buttons) {
                     var button = self.state.buttons[button_key];
@@ -59,7 +58,13 @@
                             'border-color':button.style.background_color_hover+'!important'
                         }
                         style += addClass(className,color_hover)
-                    // var className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
+                        className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
+                        color_active = {
+                            'color':button.style.color,
+                            'background-color':button.style.background_color_active+'!important',
+                            'border-color':button.style.background_color_active+'!important'
+                        }
+                        style += addClass(className,color_active)
                     }
                 }
             }

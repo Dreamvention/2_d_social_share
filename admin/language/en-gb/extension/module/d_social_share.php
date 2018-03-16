@@ -3,6 +3,8 @@
 $_['heading_title'] = ' <span style="color:#449DD0; font-weight:bold">Social Share</span><span style="font-size:12px; color:#999"> by <a href="http://www.opencart.com/index.php?route=extension/extension&filter_username=Dreamvention" style="font-size:1em; color:#999" target="_blank">Dreamvention</a></span>';
 $_['heading_title_main'] = 'Social Share';
 $_['text_edit'] = 'Edit Social Share module';
+$_['text_status'] = 'Status';
+$_['text_name'] = 'Name for your shares';
 $_['text_module'] = 'module';
 
 // Modules
@@ -44,8 +46,7 @@ $_['text_plain'] = 'Plain';
 
 $_['text_rounded'] = 'Round / Square';
 $_['text_style'] = 'Style';
-
-
+$_['text_style_share'] = 'Style share ';
 
 //settings
 $_['text_custom_url'] = 'Custom Url ';
