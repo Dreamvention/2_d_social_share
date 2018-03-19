@@ -136,15 +136,13 @@ var d_social_share = sm_core;
 
         var go = data.go;
         delete data.go;
-
         var send_data = {
-            'setting': data
+            'setting': JSON.stringify(data)
         };
         var url='index.php?route=extension/module/d_social_share/save_setting&' + this.getToken()+this.getModuleId()
-        console.log(url)
         $.post(url, send_data, function(json) {
             if (json['redirect']){
-                // location.href= json['redirect'];
+                location.href= json['redirect'];
             }
 
         }.bind(this));

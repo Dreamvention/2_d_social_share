@@ -54,16 +54,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css');
 
         $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css');
-//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css');
-//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css');
-//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-minima.css');
-//        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css');
-
         $this->document->addScript('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.js');
-//        $this->document->addScript('view/javascript/d_bootstrap_colorpicker/js/bootstrap-colorpicker.js');
-        //  $this->document->addScript('view/javascript/d_tinysort/tinysort.js');
-//        $this->document->addScript('view/javascript/d_tinysort/jquery.tinysort.min.js');
-
         $this->document->addStyle('view/stylesheet/' . $this->codename . '/styles.css');
 
         // Todo: place for style from admin_style.
@@ -94,8 +85,8 @@ class ControllerExtensionModuleDSocialShare extends Controller
         // GET STATE
         $data['state'] = $this->load_state();
         $template_path = 'extension/' . $this->codename . '/' . $this->codename;
+
         $this->response->setOutput($this->model_extension_d_opencart_patch_load->view($template_path, $data));
-//        $data = array_merge($data, $this->getTextFields());
 
 
     }
@@ -186,10 +177,10 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['get_cancel'] = $this->model_extension_d_opencart_patch_url->getExtensionAjax('module');
         $state['module_link'] = $this->model_extension_d_opencart_patch_url->link($this->route);
 
-        if (isset($this->request->get['module_id']) ) {
+        if (isset($this->request->get['module_id'])) {
             $module_info = $this->model_extension_d_opencart_patch_module->getModule($this->request->get['module_id']);
         }
-        if (isset($this->request->get['module_id'])){
+        if (isset($this->request->get['module_id'])) {
             $state['module_id'] = $this->request->get['module_id'];
         }
         if (isset($this->request->post['name'])) {
@@ -197,16 +188,22 @@ class ControllerExtensionModuleDSocialShare extends Controller
         } elseif (!empty($module_info)) {
             $state['name'] = $module_info['name'];
         } else {
-            $state['name'] = '';
+            $state['name'] = $this->codename;
         }
-
         if (isset($this->request->post['status'])) {
-            $state['status'] = $this->request->post['status'];
+            $state['status'] = $this->request->post['status'];//=== 'true' ? true : false;
         } elseif (!empty($module_info)) {
-            $state['status'] = $module_info['status'];
+            $state['status'] = $module_info['status'];//=== 'true' ? true : false;
         } else {
             $state['status'] = false;
         }
+        if (isset($module_info)&&!empty($module_info)){
+            $state['custom_url'] = $module_info['d_social_share_setting']['custom_url'];
+            $state['buttons'] = $module_info['d_social_share_setting']['buttons'];
+            $state['design'] = $module_info['d_social_share_setting']['design'];
+            $state['config'] = $module_info['d_social_share_setting']['config'];
+        }
+
         $state['module_link'] = $this->model_extension_d_opencart_patch_url->ajax($this->route);
         // Navigation
         $state['navigation'] = array(
@@ -215,8 +212,6 @@ class ControllerExtensionModuleDSocialShare extends Controller
             'setting' => array('active' => False, 'href' => $state['module_link'] . '#setting', 'icon' => 'fa fa-cog', 'text' => $state['text_settings'], 'disabled' => False),
             'help_me' => array('active' => False, 'href' => $state['module_link'] . '#help_me', 'icon' => 'fa fa-life-ring', 'text' => $state['text_help_me'], 'disabled' => False)
         );
-
-
         $state['styles_link'] = array(
             'classic' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css',
             'flat'    => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css',
@@ -237,16 +232,15 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->session->data['success'] = $this->language->get('text_success');
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             if (!isset($this->request->get['module_id'])) {
-                $this->request->post['setting']['name']=$this->model_extension_module_d_social_share->getName();
-                $this->model_extension_d_opencart_patch_module->addModule($this->codename, $this->request->post['setting']);
+                $this->model_extension_d_opencart_patch_module->addModule($this->codename, json_decode(html_entity_decode($this->request->post['setting']), true));
                 $this->request->get['module_id'] = $this->db->getLastId();
-            }else{
-                $this->model_extension_d_opencart_patch_module->editModule($this->request->get['module_id'], $this->request->post['setting']);
+            } else {
+                $this->model_extension_d_opencart_patch_module->editModule($this->request->get['module_id'], json_decode(html_entity_decode($this->request->post['setting']), true));
             }
             $this->session->data['success'] = $this->language->get('text_success');
-            $url='';
+            $url = '';
             if (isset($this->request->get['module_id'])) {
-                $url .= '&module_id='.$this->request->get['module_id'];
+                $url .= '&module_id=' . $this->request->get['module_id'];
             }
             $json['redirect'] = str_replace('&amp;', '&', $this->model_extension_d_opencart_patch_url->link($this->route, $url));
             $json['success'] = 'success';
