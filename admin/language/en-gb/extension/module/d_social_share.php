@@ -9,18 +9,11 @@ $_['text_module'] = 'module';
 
 // Modules
 $_['entry_name'] = 'Module name';
-$_['entry_config_files'] = '<span data-toggle="tooltip" title="" data-original-title="You can select another set of predefined configurations. Remember that all prevoice configurations will be lost.">Config files</span>';
+$_['button_create_ticket'] = 'Create Ticket';
 
+$_['text_help_me_description'] = 'If you interested in customization or creation custom theme for you shares buttons, contact with our highly qualified design specialist just click on button bellow.';
+$_['help_help_me'] = '* Please create a ticket and provide your Admin and FTP access data. Our specialist will provide you with a solution. The checkup fee is $20.';
 
-$_['entry_get_update'] = 'You have version %s';
-$_['success_no_update'] = 'Super! You have the latest version.';
-$_['warning_new_update'] = 'Wow! There is a new version available for download.';
-$_['error_update'] = 'Sorry! Something went wrong. If this repeats, contact the support please.';
-$_['error_failed'] = 'Oops! We could not connect to the server. Please try again later.';
-$_['button_get_update'] = 'Check for update';
-
-$_['entry_return_page_url'] = 'Enter the page url that will be used for a newly registered customer to return to (leave empty and the user will return to the previous page).';
-$_['entry_fields_sort_order'] = 'Sort and activate fields for the popup screen for the first Social Share action, which is the Social Share of a new customer. (email is not present because its activated by default) ';
 $_['text_display'] = 'Display';
 $_['text_require'] = 'Require';
 //navigation
@@ -75,10 +68,4 @@ $_['text_color_background_active_text'] = 'Background active';
 $_['text_color_background_active_text'] = 'Background active';
 $_['text_native'] = 'Native: ';
 
-
-$_['text_not_found'] = '<div class="jumbotron">
-          <h1>Please install Shopunity</h1>
-          <p>Before you can use this module you will need to install Shopunity. Simply download the archive for your version of opencart and install it view Extension Installer or unzip the archive and upload all the files into your root folder from the UPLOAD folder.</p>
-          <p><a class="btn btn-primary btn-lg" href="https://shopunity.net/download" target="_blank">Download</a></p>
-        </div>';
 ?>

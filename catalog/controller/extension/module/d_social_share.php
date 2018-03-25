@@ -23,16 +23,13 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->load->model('setting/setting');
         $this->js_folder = 'catalog/view/javascript/' . $this->codename;
         $this->css_folder = 'catalog/view/theme/default/stylesheet/' . $this->codename;
-//for test
-        $this->load->config($this->codename);
-        $this->setting = $this->config->get($this->codename.'_setting');
-        $this->setting['buttons'] = $this->model_extension_module_d_social_share->loadButtons($this->codename);
 
     }
 
-    public function index()
+    public function index($setting)
     {
         $data = array();
+        $this->setting = $this->loadSetting($setting);
         if (!$this->setting) {
             $this->session->data['d_social_share_error']['setting_error'] = 'could not load settings';
         }
@@ -55,11 +52,12 @@ class ControllerExtensionModuleDSocialShare extends Controller
         }
         //load languages text
         $buttons = array();
+//        var_export($this->setting['buttons']);
         foreach ($this->setting['buttons'] as $key => $button) {
             if ($button['enabled']) {
                 $buttons[$key] = $button;
-                $buttons[$key]['text'] = $this->language->get($button['text']);
-                $buttons[$key]['title'] = $this->language->get($button['title']);
+//                $buttons[$key]['text'] = $this->language->get($button['text']);
+//                $buttons[$key]['title'] = $this->language->get($button['title']);
             }
         }
         // sorting
@@ -78,5 +76,15 @@ class ControllerExtensionModuleDSocialShare extends Controller
             $data['custom_url'] = ($this->setting['custom_url']);
         }
         return $this->model_extension_d_opencart_patch_load->view($this->route, $data);
+    }
+
+    public function loadSetting($setting)
+    {
+        //for test
+//        $this->load->config($this->codename);
+//        $config = $this->config->get($this->codename . '_setting');
+//        var_export(   $setting[$this->codename.'_setting']['buttons']);
+//        $setting[$this->codename.'_setting']['buttons'] = $this->model_extension_module_d_social_share->loadButtons($this->codename);
+        return $setting[$this->codename.'_setting'];
     }
 }

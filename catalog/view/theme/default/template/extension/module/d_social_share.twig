@@ -1,25 +1,25 @@
 <div class="d-social-buttons-container">
     <div class="styles">
         <style>
-            {% if design.style=='custom' %}
+            {% if (design.style=='custom' or design.style=='flat')  %}
             {% for button in buttons %}
             /*btn colors */
             .jssocials-share-{{ button.id }} .jssocials-share-link {
-                color: {{ button.color }};
-                background-color: {{ button.background_color }};
-                border-color: {{ button.background_color }};
+                color: {{ button.style.color }};
+                background-color: {{ button.style.background_color }};
+                border-color: {{ button.style.background_color }};
             }
 
             .jssocials-share-{{ button.id }} .jssocials-share-link:hover {
-                color: {{ button.color }};
-                background-color: {{ button.background_color_hover }};
-                border-color: {{ button.background_color_hover }};
+                color: {{ button.style.color }};
+                background-color: {{ button.style.background_color_hover }};
+                border-color: {{ button.style.background_color_hover }};
             }
 
             .jssocials-share-{{ button.id }} .jssocials-share-link:active {
-                color: {{ button.color }};
-                background-color: {{ button.background_color_active }};
-                border-color: {{ button.background_color_active }};
+                color: {{ button.style.color }};
+                background-color: {{ button.style.background_color_active }};
+                border-color: {{ button.style.background_color_active }};
             }
 
             {% endfor %}
@@ -28,6 +28,7 @@
             .jssocials-share-link {
                 border-radius: 50%;
             }
+
             {% endif %}
             .{{ design.size }} .jssocials-share-link {
                 font-size: {{  design.sizes[design.size]["font-size"] }};
@@ -128,7 +129,7 @@
         $(document).ready(function () {
             $("#{{ codename }}").jsSocials({
                 url: '{{ custom_url }}',
-                text: '{{ config.text_to_share }}',
+                text: '{{ config.text_to_share[1] }}',//to do make multilangua
                 showLabel: '{{ config.showLabel }}',
                 showCount: '{{ config.showCount }}',
                 shareIn: '{{ config.shareIn }}',
@@ -138,16 +139,15 @@
                     {% for social , social_value in buttons %}
                     {
                         share: '{{ social_value.id }}',
-                        {% for key, value in social_value.share %}
-                        {{ key }}:"{{ value }}",
-                        {% endfor %}
+                         {% for key, value in social_value.share %}
+                            {{ key }}:"{{ value }}",
+                            {% endfor %}
                         {% if social_value.style_native %}
-                        renderer:getNativeButton('{{ social_value.id }}'),
-                        {% endif %}
-                    },
+                            renderer:getNativeButton('{{ social_value.id }}'),
+                        {% endif %}},
                     {% endfor %}
-                ]
-                })
+        ]
+        })
             ;//jsSocials
         });//document ready
     </script>

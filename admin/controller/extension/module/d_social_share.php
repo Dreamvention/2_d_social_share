@@ -57,8 +57,8 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addScript('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.js');
         $this->document->addStyle('view/stylesheet/' . $this->codename . '/styles.css');
 
-        // Todo: place for style from admin_style.
-        //        $this->document->addStyle('view/stylesheet/d_admin_style/core.css');
+        $admin_theme = 'light';
+        $this->document->addStyle('view/stylesheet/d_admin_style/themes/' . $admin_theme . '/styles.css');
         //        compiled riot tags and lib
         $this->document->addScript('view/javascript/' . $this->codename . '/compiled/core_and_libs.min.js');
         $this->document->addScript('view/template/extension/' . $this->codename . '/compiled/compiled.js');
@@ -139,6 +139,9 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['button_save_and_stay'] = $this->language->get('button_save_and_stay');
         $state['button_save'] = $this->language->get('button_save');
         $state['button_cancel'] = $this->language->get('button_cancel');
+        $state['button_create_ticket'] = $this->language->get('button_create_ticket');
+        $state['text_help_me_description'] = $this->language->get('text_help_me_description');
+        $state['help_help_me'] = $this->language->get('help_help_me');
 
         $state['version'] = $this->extension['version'];
         $state['codename'] = $this->codename;
@@ -197,7 +200,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         } else {
             $state['status'] = false;
         }
-        if (isset($module_info)&&!empty($module_info)){
+        if (isset($module_info) && !empty($module_info)) {
             $state['custom_url'] = $module_info['d_social_share_setting']['custom_url'];
             $state['buttons'] = $module_info['d_social_share_setting']['buttons'];
             $state['design'] = $module_info['d_social_share_setting']['design'];
@@ -207,16 +210,16 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['module_link'] = $this->model_extension_d_opencart_patch_url->ajax($this->route);
         // Navigation
         $state['navigation'] = array(
-            'buttons' => array('active' => True, 'href' => $state['module_link'] . '#buttons', 'icon' => 'fa fa-tachometer', 'text' => $state['text_buttons'], 'disabled' => False),
-            'design'  => array('active' => False, 'href' => $state['module_link'] . '#desing', 'icon' => 'fa fa-search', 'text' => $state['text_design'], 'disabled' => False),
+            'buttons' => array('active' => True, 'href' => $state['module_link'] . '#buttons', 'icon' => 'fa fa-bullhorn', 'text' => $state['text_buttons'], 'disabled' => False),
+            'design' => array('active' => False, 'href' => $state['module_link'] . '#desing', 'icon' => 'fa fa-paint-brush', 'text' => $state['text_design'], 'disabled' => False),
             'setting' => array('active' => False, 'href' => $state['module_link'] . '#setting', 'icon' => 'fa fa-cog', 'text' => $state['text_settings'], 'disabled' => False),
             'help_me' => array('active' => False, 'href' => $state['module_link'] . '#help_me', 'icon' => 'fa fa-life-ring', 'text' => $state['text_help_me'], 'disabled' => False)
         );
         $state['styles_link'] = array(
             'classic' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-classic.css',
-            'flat'    => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css',
+            'flat' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-flat.css',
             'minimal' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-minima.css',
-            'plain'   => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css'
+            'plain' => '../catalog/view/javascript/d_social_share/jssocials/dist/jssocials-theme-plain.css'
         );
         $state['text'] = $this->model_extension_module_d_social_share->getTextField();
         $state['token'] = $this->model_extension_d_opencart_patch_user->getUrlToken();

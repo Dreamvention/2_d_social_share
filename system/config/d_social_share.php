@@ -26,7 +26,7 @@ $_['d_social_share'] = array(
                 'padding' => '1.5rem',
                 'font-size' => '2.5rem'
             ),
-            'custom' => array()
+//            'custom' => array()
         ),
         'placement' => 'normal',
         'placements' => array('normal', 'bottom', 'left', 'right'),
@@ -37,12 +37,12 @@ $_['d_social_share'] = array(
             'classic' => array(),
             'minimal' => array(),
             'plain' => array(),
-            'custom' => array(
-                'jssocials-shares' => '',
-                'jssocials-share' => '',
-                'jssocials-share-count-box' => '',
-                'jssocials-share-no-count' => ''
-            ),
+//            'custom' => array(
+//                'jssocials-shares' => '',
+//                'jssocials-share' => '',
+//                'jssocials-share-count-box' => '',
+//                'jssocials-share-no-count' => ''
+//            ),
         ),
     ),
     'config' => array(
