@@ -1,4 +1,4 @@
-<?php
+    <?php
 /*
  *  location: catalog/controller/extension/module/d_social_share.php
  */
