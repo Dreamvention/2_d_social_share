@@ -4,8 +4,8 @@
             <div class="form-inline pull-right">
                 <button onclick={save_setting} data-go="0" id="save_and_stay" data-toggle="tooltip"
                         title="{state.button_save_and_stay}" class="btn btn-success"><i class="fa fa-save"></i></button>
-                <button onclick={save_setting} data-go="1" id="save" data-toggle="tooltip" title="{state.button_save}"
-                        class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <!--<button onclick={save_setting} data-go="1" id="save" data-toggle="tooltip" title="{state.button_save}"-->
+                        <!--class="btn btn-primary"><i class="fa fa-save"></i></button>-->
                 <a href="{state.cancel}" data-toggle="tooltip" title="{state.button_cancel}" class="btn btn-default"
                    id="cancel-button"><i class="fa fa-reply"></i></a>
             </div>
