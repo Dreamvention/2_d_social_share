@@ -1,16 +1,39 @@
-riot.tag2('d_social_share', '<div class="page-header"><div class="container-fluid"><div class="form-inline pull-right"><button onclick="{save_setting}" data-go="0" id="save_and_stay" data-toggle="tooltip" title="{state.button_save_and_stay}" class="btn btn-success"><i class="fa fa-save"></i></button><button onclick="{save_setting}" data-go="1" id="save" data-toggle="tooltip" title="{state.button_save}" class="btn btn-primary"><i class="fa fa-save"></i></button><a href="{state.cancel}" data-toggle="tooltip" title="{state.button_cancel}" class="btn btn-default" id="cancel-button"><i class="fa fa-reply"></i></a></div><h1>{state.heading_title} {state.version}</h1><sh_breadcrumbs></sh_breadcrumbs></div></div><div class="container-fluid"><div class="panel panel-default panel_top_radius"><div class="panel-heading"><h3 class="panel-title"><i class="fa fa-pencil"></i> {state.text_edit_module} </h3></div><div class="panel-body"><sh_navigation></sh_navigation><form id="setting_form" action=""><div class="tab-content "><div class="tab-pane" id="nav_buttons"><sh_buttons></sh_buttons></div><div class="tab-pane " id="nav_design"><sh_design></sh_design></div><div class="tab-pane active" id="nav_setting"><sh_settings></sh_settings></div><div class="tab-pane" id="nav_help_me"><sh_help_me></sh_help_me></div></div></form><hr><sh_show_room></sh_show_room></div></div></div>', '', '', function(opts) {
+riot.tag2('d_social_share', '<div class="page-header"><div class="container-fluid"><div class="form-inline pull-right"><button onclick="{save_setting}" data-go="0" id="save_and_stay" data-toggle="tooltip" title="{state.button_save_and_stay}" class="btn btn-success"><i class="fa fa-save"></i></button><button onclick="{save_setting}" data-go="1" id="save" data-toggle="tooltip" title="{state.button_save}" class="btn btn-primary"><i class="fa fa-save"></i></button><a href="{state.cancel}" data-toggle="tooltip" title="{state.button_cancel}" class="btn btn-default" id="cancel-button"><i class="fa fa-reply"></i></a></div><h1>{state.heading_title} {state.version}</h1><sh_breadcrumbs></sh_breadcrumbs></div></div><div class="container-fluid"><div class="panel panel-default panel_top_radius"><div class="panel-heading"><h3 class="panel-title"><i class="fa fa-pencil"></i> {state.text_edit} </h3><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_name}</label></div><div class="col-sm-10"><input class="form-control" onchange="{this.changeName}" name="{state.codename}_setting[name]" riot-value="{state.name}"></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_status}</label></div><div class="col-sm-10"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[status]" class="switcher" data-label-text="{state.text_enabled}" checked="{state.status ? \'checked\':\'\'}" id="status" value="1"></span></div></div></div></div><div class="panel-body" if="{state.status}"><sh_navigation></sh_navigation><form id="setting_form" action=""><div class="tab-content "><div class="tab-pane active" id="nav_buttons"><sh_buttons></sh_buttons></div><div class="tab-pane " id="nav_design"><sh_design></sh_design></div><div class="tab-pane " id="nav_setting"><sh_settings></sh_settings></div><div class="tab-pane" id="nav_help_me"><sh_help_me></sh_help_me></div></div></form><hr><sh_show_room></sh_show_room></div></div></div>', '', '', function(opts) {
         this.mixin({store: d_social_share});
         var self = this;
-        this.save_setting = function(e) {
+        this.changeName = function(e)
+        {
+            self.state.name = e.target.value;
+            self.store.updateState(['name'], self.state.name);
+        }.bind(this)
+        this.save_setting = function(e)
+        {
             e.preventDefault = true;
             var go = parseInt(e.currentTarget.getAttribute('data-go'));
-            data_={"d_social_share_setting":{"custom_ulr":this.state.custom_url,"buttons":this.state.buttons,"design":this.state.design,"config":this.state.config}}
+            data_ = {
+                "d_social_share_setting": {
+                    "custom_url": this.state.custom_url,
+                    "buttons": this.state.buttons,
+                    "design": this.state.design,
+                    "config": this.state.config
+                },
+                "status": this.state.status,
+                "name": this.state.name
+            }
             self.store.dispatch('setting/save_setting', data_);
-            if (go == 1) { $(location).attr('href', this.state.cancel); }
+            if (go == 1) {
+                $(location).attr('href', this.state.cancel);
+            }
         }.bind(this)
         self.state = this.store.getState();
         self.on('mount', function () {
+            console.log(this.state)
             loadlibs();
+            $('#status').on('switchChange.bootstrapSwitch', function (e, state) {
+                self.state.status = state;
+                self.store.updateState(['status'], self.state.status);
+            })
+
         })
         self.on('updated', function () {
             loadlibs();
@@ -25,7 +48,6 @@ riot.tag2('d_social_share', '<div class="page-header"><div class="container-flui
                 'offText': self.state.text_no,
             });
         }
-
 });
 
 riot.tag2('sh_breadcrumbs', '<ul class="breadcrumb"><li each="{el in state.breadcrumbs}"><a href="{el.href}">{el.text}</a></li></ul>', '', '', function(opts) {
@@ -40,11 +62,14 @@ riot.tag2('sh_breadcrumbs', '<ul class="breadcrumb"><li each="{el in state.bread
         });
 
 });
-riot.tag2('sh_navigation', '<ul class="nav nav-tabs"><li each="{el, i in state.navigation}"><a href="#nav_{i}" data-toggle="tab" class="htab-item {el.disabled ? \'disable_link ignore\' : \'\'}"><i class="{el.icon}"></i> {el.text} </a></li></ul>', '', '', function(opts) {
+riot.tag2('sh_navigation', '<ul class="nav nav-tabs navigation"><li each="{el, i in state.navigation}"><a href="#nav_{i}" data-toggle="tab" class="htab-item {el.disabled ? \'disable_link ignore\' : \'\'}"><i class="{el.icon}"></i> {el.text} </a></li></ul>', '', '', function(opts) {
         this.mixin({store: d_social_share});
         var self = this;
         self.state = this.store.getState();
 
+        self.on('mount', function () {
+            $($('.navigation li')[0]).addClass('active')
+        })
         self.on('update', function () {
             self.state = self.store.getState();
         });
@@ -86,7 +111,15 @@ riot.tag2('sh_design', '<h3>{state.text_design}</h3><div class="form-group"><div
             self.state = self.store.getState();
         });
 });
-riot.tag2('sh_settings', '<div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_custom_url}</label></div><div class="col-sm-10"><input class="form-control" onchange="{this.changeCustom}" name="{state.codename}_setting[custom_url]"></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_style}</label></div><div class="col-sm-10"><select class="form-control" onchange="{this.changeShareIn}" name="{state.codename}_setting[config][shareIn]"><option each="{value, key in state.config.shareIns}" riot-value="{value}" selected="{state.config.shareIn==value}"> {state.text.shareIns[value]}-{value} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_show_label}</label></div><div class="col-sm-10"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[config][showLabel]" class="switcher" data-label-text="{state.text_enabled}" checked="{state.config.showLabel ? \'checked\':\'\'}" id="showLabel" value="1" onchange="{changeShowLabel}"></span></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_show_count}</label></div><div class="col-sm-10"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[config][showCount]" class="switcher" data-label-text="{state.text_enabled}" checked="{state.config.showLabel ? \'checked\':\'\'}" id="showCount" value="1" onchange="{changShowCount}"></span></div></div></div>', '', '', function(opts) {
+riot.tag2('sh_help_me', '<h3>{state.text_help_me}</h3>', '', '', function(opts) {
+        this.mixin({store: d_social_share});
+        var self = this;
+        self.state = self.store.getState();
+        self.on('update', function () {
+            self.state = self.store.getState();
+        });
+});
+riot.tag2('sh_settings', '<h3>{state.text_settings}</h3><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_custom_url}</label></div><div class="col-sm-10"><input class="form-control" onchange="{this.changeCustom}" name="{state.codename}_setting[custom_url]" riot-value="{state.custom_url}"></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_style_share}</label></div><div class="col-sm-10"><select class="form-control" onchange="{this.changeShareIn}" name="{state.codename}_setting[config][shareIn]"><option each="{value, key in state.config.shareIns}" riot-value="{value}" selected="{state.config.shareIn==value}"> {state.text.shareIns[value]}-{value} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_show_label}</label></div><div class="col-sm-10"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[config][showLabel]" class="switcher" data-label-text="{state.text_enabled}" checked="{state.config.showLabel ? \'checked\':\'\'}" id="showLabel" value="1" onchange="{changeShowLabel}"></span></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_show_count}</label></div><div class="col-sm-10"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[config][showCount]" class="switcher" data-label-text="{state.text_enabled}" checked="{state.config.showLabel ? \'checked\':\'\'}" id="showCount" value="1" onchange="{changShowCount}"></span></div></div></div>', '', '', function(opts) {
         this.mixin({store: d_social_share});
         var self = this;
         self.state = self.store.getState();
@@ -105,7 +138,6 @@ riot.tag2('sh_settings', '<div class="form-group"><div class="row"><div class="c
             $('#showCount').on('switchChange.bootstrapSwitch', function (e, state) {
                 self.state.config.showCount = state;
                 self.store.updateState(['config'], self.state.config);
-
             })
             $('#showLabel').on('switchChange.bootstrapSwitch', function (e, state) {
                 self.state.config.showLabel = state;
@@ -143,8 +175,7 @@ riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"
                     'border-radius': self.state.design.rounded?'50% !important':'0',
                     'padding':self.state.design.sizes[self.state.design.size].padding+" !important",
                     'font-size':self.state.design.sizes[self.state.design.size]['font-size'],
-                }
-            )
+                })
             if (self.state.design.style == 'flat'){
                 for(var button_key in self.state.buttons) {
                     var button = self.state.buttons[button_key];
@@ -163,7 +194,13 @@ riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"
                             'border-color':button.style.background_color_hover+'!important'
                         }
                         style += addClass(className,color_hover)
-
+                        className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
+                        color_active = {
+                            'color':button.style.color,
+                            'background-color':button.style.background_color_active+'!important',
+                            'border-color':button.style.background_color_active+'!important'
+                        }
+                        style += addClass(className,color_active)
                     }
                 }
             }
