@@ -5,89 +5,106 @@
             </div>
         </div>
         <div class="button_load">
-            <div id="{state.codename}" ></div>
+            <div id="{state.codename}"></div>
         </div>
     </div>
-    <link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css" if="{state.design.style != 'custom'}">
+    <link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css"
+          if="{state.design.style != 'custom'}">
 
     <script>
-        function getButtons(){
-            $("#"+ self.state.codename ).jsSocials({
-                url: self.state.custom_url ,
+        function getButtons() {
+            $("#" + self.state.codename).jsSocials({
+                url: self.state.custom_url,
                 text: self.state.config.text_to_share,
                 showLabel: self.state.config.showLabel,
-                showCount: self.state.config.showCount ,
+                showCount: self.state.config.showCount,
                 shareIn: self.state.config.shareIn,
-                smallScreenWidth: self.state.config.breakpoints.smallScreenWidth ,
-                largeScreenWidth: self.state.config.breakpoints.largeScreenWidth ,
+                smallScreenWidth: self.state.config.breakpoints.smallScreenWidth,
+                largeScreenWidth: self.state.config.breakpoints.largeScreenWidth,
                 shares: getButtonsShares()
             })
         }
-        function addClass(className,classValues) {
-            styleContainer =className+'{';
-            for (key in classValues){
-                styleContainer+=key+':'+classValues[key]+';'
+
+        function addClass(className, classValues) {
+            styleContainer = className + '{';
+            for (key in classValues) {
+                styleContainer += key + ':' + classValues[key] + ';'
             }
-            styleContainer +='}';
-            return  styleContainer;
+            styleContainer += '}';
+            return styleContainer;
         }
+
         function SetStyles() {
             $('html > head').find('[title="d_social_share"]').remove();
             var style = '<style title="d_social_share">';//'</style>'
             style += addClass('.jssocials-share-link',
                 {
-                    'border-radius': self.state.design.rounded?'50% !important':'0',
-                    'padding':self.state.design.sizes[self.state.design.size].padding+" !important",
-                    'font-size':self.state.design.sizes[self.state.design.size]['font-size'],
+                    'border-radius': self.state.design.rounded ? '50% !important' : '0',
+                    'padding': self.state.design.sizes[self.state.design.size].padding + " !important",
+                    'font-size': self.state.design.sizes[self.state.design.size]['font-size'],
                 })
-            if (self.state.design.style == 'flat'){
-                for(var button_key in self.state.buttons) {
+            if (self.state.design.style == 'flat') {
+                for (var button_key in self.state.buttons) {
                     var button = self.state.buttons[button_key];
-                    if (button.enabled){
-                        var className = '.jssocials-share-'+button.id+' .jssocials-share-link';
+                    if (button.enabled) {
+                        var className = '.jssocials-share-' + button.id + ' .jssocials-share-link';
                         color = {
-                            'color':button.style.color,
-                            'background-color':button.style.background_color+'!important',
-                            'border-color':button.style.background_color+'!important'
+                            'color': button.style.color,
+                            'background-color': button.style.background_color + '!important',
+                            'border-color': button.style.background_color + '!important'
                         }
-                        style += addClass(className,color)
-                        className = '.jssocials-share-'+button.id+' .jssocials-share-link:hover';
+                        style += addClass(className, color)
+                        className = '.jssocials-share-' + button.id + ' .jssocials-share-link:hover';
                         color_hover = {
-                            'color':button.style.color,
-                            'background-color':button.style.background_color_hover+'!important',
-                            'border-color':button.style.background_color_hover+'!important'
+                            'color': button.style.color,
+                            'background-color': button.style.background_color_hover + '!important',
+                            'border-color': button.style.background_color_hover + '!important'
                         }
-                        style += addClass(className,color_hover)
-                        className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
+                        style += addClass(className, color_hover)
+                        className = '.jssocials-share-' + button.id + ' .jssocials-share-link:active';
                         color_active = {
-                            'color':button.style.color,
-                            'background-color':button.style.background_color_active+'!important',
-                            'border-color':button.style.background_color_active+'!important'
+                            'color': button.style.color,
+                            'background-color': button.style.background_color_active + '!important',
+                            'border-color': button.style.background_color_active + '!important'
                         }
-                        style += addClass(className,color_active)
+                        style += addClass(className, color_active)
                     }
                 }
             }
-            style+='</style>'
+            style += '</style>'
             var $style = $(style)
             $('html > head').append($style);
         }
-        getButtonsShares=function () {
+
+        getButtonsShares = function () {
             var buttons = [];
-            for(var button_key in self.state.buttons) {
+
+            //need to sort them
+            function compareNumeric(a, b) {
+                if (a.sort_order > b.sort_order) return 1;
+                if (a.sort_order < b.sort_order) return -1;
+            }
+
+            var buttons_un_sorted = self.state.buttons;
+            // alert(buttons_un_sorted);
+            for (var button_key in buttons_un_sorted) {
                 var button = self.state.buttons[button_key];
-                if (button.enabled){
+                if (button.enabled) {
                     var button_share = button.share;
                     button_share.share = button.id;
+                    button_share.sort_order = button.sort_order;
                     // if (typeof button.style.native != 'undefined' && button.style.native ){
                     //     if (typeof button_share.renderer=='undefined')
                     //     button_share.renderer = getNativeButton(button.id)
                     // } donn't work yet in admin
                     buttons.push(button_share)
+
                 }
             }
+            buttons.sort(compareNumeric);
             return buttons;
         }
+
         function getNativeButton(native) {
             switch (native) {
                 case 'facebook':
@@ -167,17 +184,18 @@
                     }
             }
         }
+
         this.mixin({store: d_social_share});
         var self = this;
         self.state = this.store.getState();
         self.on('mount', function () {
             // костыли потому что не могу биндить стиль if он всеравно подключается
-            setTimeout(SetStyles,200);
+            setTimeout(SetStyles, 200);
             getButtons();//jsSocials
 
         })
         self.on('updated', function () {
-            setTimeout(SetStyles,50);
+            setTimeout(SetStyles, 50);
             getButtons();//jsSocials
         });
         self.on('update', function () {

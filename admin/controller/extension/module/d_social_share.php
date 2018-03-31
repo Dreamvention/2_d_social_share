@@ -63,6 +63,8 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addScript('view/javascript/' . $this->codename . '/compiled/core_and_libs.min.js');
         $this->document->addScript('view/template/extension/' . $this->codename . '/compiled/compiled.js');
 
+        $this->document->addScript('view/javascript/' . $this->codename . '/library/jquery-ui/jquery-ui.js');
+
         $this->document->setTitle($this->language->get('heading_title_main'));
 
         if (isset($this->error['warning'])) {
@@ -202,7 +204,18 @@ class ControllerExtensionModuleDSocialShare extends Controller
         }
         if (isset($module_info) && !empty($module_info)) {
             $state['custom_url'] = $module_info['d_social_share_setting']['custom_url'];
-            $state['buttons'] = $module_info['d_social_share_setting']['buttons'];
+
+            // sorting
+            $buttons=$module_info['d_social_share_setting']['buttons'];
+            $sort_order = array();
+            foreach ($buttons as $key => $value) {
+                $sort_order[$key] = $value['sort_order'];
+            }
+            array_multisort($sort_order, SORT_ASC, $buttons);
+
+
+            $state['buttons'] = $buttons;
+
             $state['design'] = $module_info['d_social_share_setting']['design'];
             $state['config'] = $module_info['d_social_share_setting']['config'];
         }

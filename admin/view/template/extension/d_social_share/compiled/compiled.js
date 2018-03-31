@@ -75,7 +75,32 @@ riot.tag2('sh_navigation', '<ul class="nav nav-tabs navigation"><li each="{el, i
         });
 
 });
-riot.tag2('sh_buttons', '<h3>{state.text_buttons}</h3><div class="buttons-wrap"><sh_button_info each="{button,i in state.buttons}"></sh_button_info></div></div>', '', '', function(opts) {
+riot.tag2('sh_buttons', '<h3>{state.text_buttons}</h3><div class="buttons-wrap" id="sortable"><sh_button_info each="{button,i in state.buttons}" class="portlet" id="btn-{i}"></sh_button_info></div></div>', 'sh_buttons .portlet-placeholder,[data-is="sh_buttons"] .portlet-placeholder{ border: 1px dotted black; margin: 0 1em 1em 0; height: 120px; } sh_buttons .sh_title:hover,[data-is="sh_buttons"] .sh_title:hover{ cursor: move; color: #106e41; }', '', function(opts) {
+        $(function () {
+            $("#sortable").sortable({
+                connectWith: "#sortable",
+                handle: ".sh_title",
+                placeholder: "portlet-placeholder ui-corner-all",
+                update: function () { save_new_order() }
+            });
+
+            function save_new_order() {
+                var a = [];
+                var btn_order={};
+                $('#sortable').children().each(function (i) {
+                    var btn_id = $(this).attr('id').replace('btn-', '');
+                    self.state.buttons[btn_id].sort_order = i;
+                });
+                self.store.updateState(['buttons'], self.state.buttons);
+
+            }
+        })
+
+        $(".portlet")
+            .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+            .find(".sh_title")
+            .addClass("ui-widget-header ui-corner-all")
+
         this.mixin({store: d_social_share});
         var self = this;
         self.state = self.store.getState();
@@ -147,80 +172,95 @@ riot.tag2('sh_settings', '<h3>{state.text_settings}</h3><div class="form-group">
 
 });
 riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"><div class="show-back-foot"></div></div><div class="button_load"><div id="{state.codename}"></div></div></div><link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css" if="{state.design.style != \'custom\'}">', '', '', function(opts) {
-        function getButtons(){
-            $("#"+ self.state.codename ).jsSocials({
-                url: self.state.custom_url ,
+        function getButtons() {
+            $("#" + self.state.codename).jsSocials({
+                url: self.state.custom_url,
                 text: self.state.config.text_to_share,
                 showLabel: self.state.config.showLabel,
-                showCount: self.state.config.showCount ,
+                showCount: self.state.config.showCount,
                 shareIn: self.state.config.shareIn,
-                smallScreenWidth: self.state.config.breakpoints.smallScreenWidth ,
-                largeScreenWidth: self.state.config.breakpoints.largeScreenWidth ,
+                smallScreenWidth: self.state.config.breakpoints.smallScreenWidth,
+                largeScreenWidth: self.state.config.breakpoints.largeScreenWidth,
                 shares: getButtonsShares()
             })
         }
-        function addClass(className,classValues) {
-            styleContainer =className+'{';
-            for (key in classValues){
-                styleContainer+=key+':'+classValues[key]+';'
+
+        function addClass(className, classValues) {
+            styleContainer = className + '{';
+            for (key in classValues) {
+                styleContainer += key + ':' + classValues[key] + ';'
             }
-            styleContainer +='}';
-            return  styleContainer;
+            styleContainer += '}';
+            return styleContainer;
         }
+
         function SetStyles() {
             $('html > head').find('[title="d_social_share"]').remove();
             var style = '<style title="d_social_share">';
             style += addClass('.jssocials-share-link',
                 {
-                    'border-radius': self.state.design.rounded?'50% !important':'0',
-                    'padding':self.state.design.sizes[self.state.design.size].padding+" !important",
-                    'font-size':self.state.design.sizes[self.state.design.size]['font-size'],
+                    'border-radius': self.state.design.rounded ? '50% !important' : '0',
+                    'padding': self.state.design.sizes[self.state.design.size].padding + " !important",
+                    'font-size': self.state.design.sizes[self.state.design.size]['font-size'],
                 })
-            if (self.state.design.style == 'flat'){
-                for(var button_key in self.state.buttons) {
+            if (self.state.design.style == 'flat') {
+                for (var button_key in self.state.buttons) {
                     var button = self.state.buttons[button_key];
-                    if (button.enabled){
-                        var className = '.jssocials-share-'+button.id+' .jssocials-share-link';
+                    if (button.enabled) {
+                        var className = '.jssocials-share-' + button.id + ' .jssocials-share-link';
                         color = {
-                            'color':button.style.color,
-                            'background-color':button.style.background_color+'!important',
-                            'border-color':button.style.background_color+'!important'
+                            'color': button.style.color,
+                            'background-color': button.style.background_color + '!important',
+                            'border-color': button.style.background_color + '!important'
                         }
-                        style += addClass(className,color)
-                        className = '.jssocials-share-'+button.id+' .jssocials-share-link:hover';
+                        style += addClass(className, color)
+                        className = '.jssocials-share-' + button.id + ' .jssocials-share-link:hover';
                         color_hover = {
-                            'color':button.style.color,
-                            'background-color':button.style.background_color_hover+'!important',
-                            'border-color':button.style.background_color_hover+'!important'
+                            'color': button.style.color,
+                            'background-color': button.style.background_color_hover + '!important',
+                            'border-color': button.style.background_color_hover + '!important'
                         }
-                        style += addClass(className,color_hover)
-                        className = '.jssocials-share-'+button.id+' .jssocials-share-link:active';
+                        style += addClass(className, color_hover)
+                        className = '.jssocials-share-' + button.id + ' .jssocials-share-link:active';
                         color_active = {
-                            'color':button.style.color,
-                            'background-color':button.style.background_color_active+'!important',
-                            'border-color':button.style.background_color_active+'!important'
+                            'color': button.style.color,
+                            'background-color': button.style.background_color_active + '!important',
+                            'border-color': button.style.background_color_active + '!important'
                         }
-                        style += addClass(className,color_active)
+                        style += addClass(className, color_active)
                     }
                 }
             }
-            style+='</style>'
+            style += '</style>'
             var $style = $(style)
             $('html > head').append($style);
         }
-        getButtonsShares=function () {
+
+        getButtonsShares = function () {
             var buttons = [];
-            for(var button_key in self.state.buttons) {
+
+            function compareNumeric(a, b) {
+                if (a.sort_order > b.sort_order) return 1;
+                if (a.sort_order < b.sort_order) return -1;
+            }
+
+            var buttons_un_sorted = self.state.buttons;
+
+            for (var button_key in buttons_un_sorted) {
                 var button = self.state.buttons[button_key];
-                if (button.enabled){
+                if (button.enabled) {
                     var button_share = button.share;
                     button_share.share = button.id;
+                    button_share.sort_order = button.sort_order;
 
                     buttons.push(button_share)
+
                 }
             }
+            buttons.sort(compareNumeric);
             return buttons;
         }
+
         function getNativeButton(native) {
             switch (native) {
                 case 'facebook':
@@ -300,17 +340,18 @@ riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"
                     }
             }
         }
+
         this.mixin({store: d_social_share});
         var self = this;
         self.state = this.store.getState();
         self.on('mount', function () {
 
-            setTimeout(SetStyles,200);
+            setTimeout(SetStyles, 200);
             getButtons();
 
         })
         self.on('updated', function () {
-            setTimeout(SetStyles,50);
+            setTimeout(SetStyles, 50);
             getButtons();
         });
         self.on('update', function () {
@@ -384,16 +425,17 @@ riot.tag2('shb_style', '<div class="shb_style"><div class="text_color_picker"><d
         });
 
 });
-riot.tag2('shb_logo', '<div class="shb_logo" onclick="{changeIcon}"><i class="{opts.logo}"></i></div>', '', '', function(opts) {
+riot.tag2('shb_logo', '<div class="shb_logo" onclick="{changeIcon}"><i class=""></i></div>', '', '', function(opts) {
         changeIcon = function (e){
 
         }
         this.mixin({store: d_social_share});
+
         var self = this;
         self.state = this.store.getState();
-
         self.on('mount', function () {
         })
+
         self.on('update', function () {
             self.state = self.store.getState();
         });
