@@ -15,16 +15,12 @@
                 </span>
         </div>
         <div if="{button.enabled}">
-            <!--<div class="{!button.enabled ? 'collapse ':''}" id="{button.id}_collapse">-->
-            <div class="form-group" if="{isLabeled}">
+            <div class="form-group" if="{state.config.showLabel}">
                 <label for="">{state.text_button_label}</label>
                 <input type="text" class="form-control" value="{button.share.label}" onchange="{labelChange}">
             </div>
             <div class="form-group">
-                <input type="text" hidden value="{button.share.logo}">
-                <label for="">{state.text_button_icon}</label>
-                <shb_logo logo="{button.share.logo}"></shb_logo>
-
+                <shb_logo logo="{button.share.logo}" id="{this.i}"></shb_logo>
             </div>
             <div class="form-group" if="{state.design.style=='flat'}">
                 <label for="">{state.text_colors}</label>

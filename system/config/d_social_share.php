@@ -28,8 +28,8 @@ $_['d_social_share'] = array(
             ),
 //            'custom' => array()
         ),
-        'placement' => 'normal',
-        'placements' => array('normal', 'bottom', 'left', 'right'),
+        'placement' => 'module',
+        'placements' => array('module', 'fixed'=>array('bottom', 'left', 'right'),'product'),
         'rounded' => true,
         'style' => 'flat',
         'styles' => array(

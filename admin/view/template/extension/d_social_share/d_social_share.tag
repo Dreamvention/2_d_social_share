@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="panel-body" if="{state.status}">
+            <div class="panel-body" >
                 <sh_navigation></sh_navigation>
                 <form id="setting_form" action="">
                     <div class="tab-content ">
@@ -123,6 +123,16 @@
                 'onColor': 'success',
                 'onText': self.state.text_yes,
                 'offText': self.state.text_no,
+            });
+            var picker = $('[name=icon]').fontIconPicker({
+                source: $.iconset['fontawesome'],
+                emptyIcon: false,
+                hasSearch: true,
+                iconsPerPage: 1000
+            }).on('change', function (e,i) {
+                self.state.buttons[e.target.id.replace('icon-','')].share.logo=$(this).val()
+                self.store.updateState(['buttons'], self.state.buttons);
+
             });
         }
     </script>

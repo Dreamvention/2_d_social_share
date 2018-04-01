@@ -20,6 +20,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->d_opencart_patch = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_opencart_patch.json'));
         $this->extension = json_decode(file_get_contents(DIR_SYSTEM . 'library/d_shopunity/extension/' . $this->codename . '.json'), true);
         $this->d_twig_manager = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_twig_manager.json'));
+        $this->d_event_manager = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_event_manager.json'));
     }
 
     public function index()
@@ -64,6 +65,10 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addScript('view/template/extension/' . $this->codename . '/compiled/compiled.js');
 
         $this->document->addScript('view/javascript/' . $this->codename . '/library/jquery-ui/jquery-ui.js');
+        $this->document->addScript('view/javascript/' . $this->codename . '/library/fontIconPicker/iconset.js');
+        $this->document->addScript('view/javascript/' . $this->codename . '/library/fontIconPicker/jquery.fonticonpicker.min.js ');
+        $this->document->addStyle('view/javascript/' . $this->codename . '/library/fontIconPicker/jquery.fonticonpicker.css');
+        $this->document->addStyle('view/javascript/' . $this->codename . '/library/fontIconPicker/jquery.fonticonpicker.grey.min.css');
 
         $this->document->setTitle($this->language->get('heading_title_main'));
 
@@ -204,18 +209,14 @@ class ControllerExtensionModuleDSocialShare extends Controller
         }
         if (isset($module_info) && !empty($module_info)) {
             $state['custom_url'] = $module_info['d_social_share_setting']['custom_url'];
-
-            // sorting
-            $buttons=$module_info['d_social_share_setting']['buttons'];
+            // sorting buttons
+            $buttons = $module_info['d_social_share_setting']['buttons'];
             $sort_order = array();
             foreach ($buttons as $key => $value) {
                 $sort_order[$key] = $value['sort_order'];
             }
             array_multisort($sort_order, SORT_ASC, $buttons);
-
-
             $state['buttons'] = $buttons;
-
             $state['design'] = $module_info['d_social_share_setting']['design'];
             $state['config'] = $module_info['d_social_share_setting']['config'];
         }
@@ -279,12 +280,16 @@ class ControllerExtensionModuleDSocialShare extends Controller
         }
     }
 
+    public function installEvents($status)
+    {
+        if ($this->d_event_manager) {
+            $this->load->model('extension/module/d_event_manager');
+            $this->model_extension_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/product/before', 'extension/module/' . $this->codename . '/eventLoadSharesProduct');
+        }
+    }
     public function uninstall()
     {
         $this->load->model($this->route);
         $this->load->model('extension/d_opencart_patch/modification');
     }
-
 }
-
-?>

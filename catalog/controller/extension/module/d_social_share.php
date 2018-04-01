@@ -80,11 +80,9 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
     public function loadSetting($setting)
     {
-        //for test
-//        $this->load->config($this->codename);
-//        $config = $this->config->get($this->codename . '_setting');
-//        var_export(   $setting[$this->codename.'_setting']['buttons']);
-//        $setting[$this->codename.'_setting']['buttons'] = $this->model_extension_module_d_social_share->loadButtons($this->codename);
         return $setting[$this->codename.'_setting'];
+    }
+    public function eventLoadSharesProduct(&$route, &$data, &$output){
+
     }
 }
