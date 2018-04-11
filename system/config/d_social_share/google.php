@@ -6,7 +6,7 @@ $_['d_social_share_google'] = array(
         "id" => 'googleplus',
         //js-socials
         "share" => array(
-            'label' => "",
+            'label' => array(1=>""),
             'logo' => "fa fa-google-plus",
         ),
         'style' => array(

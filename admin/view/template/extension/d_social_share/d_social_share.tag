@@ -132,7 +132,6 @@
             }).on('change', function (e,i) {
                 self.state.buttons[e.target.id.replace('icon-','')].share.logo=$(this).val()
                 self.store.updateState(['buttons'], self.state.buttons);
-
             });
         }
     </script>

@@ -1,42 +1,42 @@
 <?php
 $_['d_social_share'] = array(
-    "status" => "1",
+    "status"     => "1",
     'custom_url' => 'google.com',// may be
-    "buttons" => array(),
-    "design" => array(
-        'size' => 'medium',
-        'sizes' => array(
+    "buttons"    => array(),
+    "design"     => array(
+        'size'       => 'medium',
+        'sizes'      => array(
             'extra_small' => array(
-                'padding' => '.4rem',
+                'padding'   => '.4rem',
                 'font-size' => '1.1em'
             ),
-            'small' => array(
-                'padding' => '.7rem',
+            'small'       => array(
+                'padding'   => '.7rem',
                 'font-size' => '1.2em'
             ),
-            'medium' => array(
-                'padding' => '1rem',
+            'medium'      => array(
+                'padding'   => '1rem',
                 'font-size' => '1.8rem'
             ),
-            'large' => array(
-                'padding' => '1.2rem',
+            'large'       => array(
+                'padding'   => '1.2rem',
                 'font-size' => '2rem'
             ),
-            'huge' => array(
-                'padding' => '1.5rem',
+            'huge'        => array(
+                'padding'   => '1.5rem',
                 'font-size' => '2.5rem'
             ),
 //            'custom' => array()
         ),
-        'placement' => 'module',
-        'placements' => array('module', 'fixed'=>array('bottom', 'left', 'right'),'product'),
-        'rounded' => true,
-        'style' => 'flat',
-        'styles' => array(
-            'flat' => array(),
+        'placement'  => 'module',
+        'placements' => array('module', 'fixed' => array('bottom', 'left', 'right'), 'product'),
+        'rounded'    => true,
+        'style'      => 'flat',
+        'styles'     => array(
+            'flat'    => array(),
             'classic' => array(),
             'minimal' => array(),
-            'plain' => array(),
+            'plain'   => array(),
 //            'custom' => array(
 //                'jssocials-shares' => '',
 //                'jssocials-share' => '',
@@ -44,19 +44,34 @@ $_['d_social_share'] = array(
 //                'jssocials-share-no-count' => ''
 //            ),
         ),
+        'animation'  => 'bounce',
+        'animations'  => array(
+            '',
+            'slideInUp',
+            'pulse',
+            'tada',
+            'jello',
+            'fadeIn',
+            'fadeInUp',
+            'bounce',
+            'bounceIn',
+            'zoomIn',
+            'zoomInDown',
+            'zoomInUp'
+        ),
     ),
-    'config' => array(
+    'config'     => array(
         'text_to_share' => array(1 => "Text to share"),
-        'showLabel' => false,
-        'showCount' => false,
-        'shareIn' => 'popup',
-        'breakpoints' => array(
+        'showLabel'     => true,
+        'showCount'     => false,
+        'shareIn'       => 'popup',
+        'breakpoints'   => array(
             'smallScreenWidth' => 640,
             'largeScreenWidth' => 1024
         ),
-        'shareIns'=>array('blank','popup','self'),
-        'popup_size' => array(
-            'width' => '200px',
+        'shareIns'      => array('blank', 'popup', 'self'),
+        'popup_size'    => array(
+            'width'  => '200px',
             'height' => '300px'
         ),
     ),

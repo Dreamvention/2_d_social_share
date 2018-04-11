@@ -6,7 +6,7 @@ $_['d_social_share_pinterest'] = array(
         "id" => 'pinterest',
         //js-socials
         "share" => array(
-            'label' => "Pin it",
+            'label' => array(1=>"Pin it"),
             'logo' => "fa fa-pinterest",
             'media' => ""               // a url of media to share
         ),

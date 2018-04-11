@@ -33,13 +33,9 @@ class ControllerExtensionModuleDSocialShare extends Controller
         if (!$this->setting) {
             $this->session->data['d_social_share_error']['setting_error'] = 'could not load settings';
         }
-        if (!$this->config->get($this->codename . '_status')) {
-            return false;
-        }
 
         // css js loading
         $this->document->addStyle($this->css_folder . '/styles.css');
-        $this->document->addScript($this->js_folder . '/jquery.social-buttons.js');
         $this->document->addScript($this->js_folder . '/jssocials/dist/jssocials.js');
         if ($this->setting['design']['style'] !== 'custom') {
             $this->document->addStyle($this->js_folder . '/jssocials/dist/jssocials.css');

@@ -6,7 +6,7 @@ $_['d_social_share_linkedin'] = array(
         "id" => 'linkedin',
         //js-socials
         "share" => array(
-            'label' => "Share",
+            'label' =>array( 1=>"Share"),
             'logo' => "fa fa-linkedin"
         ),
         'style' => array(

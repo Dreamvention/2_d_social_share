@@ -51,7 +51,6 @@
     },
     "files": [
         "system/library/d_shopunity/extension/d_social_share.json",
-        "system/library/d_shopunity/install/d_social_share.xml",
         "system/config/d_social_share.php",
 
         "system/config/d_social_share/facebook.php",
@@ -63,7 +62,6 @@
         "admin/controller/extension/module/d_social_share.php",
         "admin/model/extension/module/d_social_share.php",
         "admin/language/en-gb/extension/module/d_social_share.php",
-        "admin/view/template/extension/module/d_social_share.twig",
 
         "catalog/controller/extension/module/d_social_share.php",
         "catalog/model/extension/module/d_social_share.php",

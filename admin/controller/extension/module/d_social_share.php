@@ -217,6 +217,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
             }
             array_multisort($sort_order, SORT_ASC, $buttons);
             $state['buttons'] = $buttons;
+            $design = $module_info['d_social_share_setting']['design'];
             $state['design'] = $module_info['d_social_share_setting']['design'];
             $state['config'] = $module_info['d_social_share_setting']['config'];
         }

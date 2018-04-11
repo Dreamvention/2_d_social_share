@@ -1,6 +1,6 @@
 <sh_design>
-        <h3 >{state.text_design}</h3>
-        <div class="form-group">
+    <h3 >{state.text_design}</h3>
+    <div class="form-group">
             <div class="row">
                 <div class="col-sm-2">
                     <label>{state.text_size}</label>
@@ -23,6 +23,21 @@
                 <select class="form-control" onchange="{this.changeStyles}" name="{state.codename}_setting[design][style]">
                     <option each={value, sty in state.design.styles} value={sty}
                             selected={state.design.style==sty}>
+                        {state.text.styles[sty]}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-2">
+                <label>{state.text_animation}</label>
+            </div>
+            <div class="col-sm-10">
+                <select class="form-control" onchange="{this.changeAnimations}" name="{state.codename}_setting[design][animation]">
+                    <option each={value, style_animation in state.design.styles} value={style_animation}
+                            selected={state.design.style==style_animation}>
                         {state.text.styles[sty]}
                     </option>
                 </select>

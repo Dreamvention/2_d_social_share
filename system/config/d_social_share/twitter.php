@@ -6,7 +6,7 @@ $_['d_social_share_twitter'] = array(
         "id" => 'twitter',
         //js-socials
         "share" => array(
-            'label' => "Tweet",
+            'label' => array(1=>"Tweet"),
             'logo' => "fa fa-twitter",
             'via' => "",                // a Twitter username specifying the source of a Tweet.
             'hashtags' => ""            // a comma-separated list of hashtags to be appended to Tweet text.
