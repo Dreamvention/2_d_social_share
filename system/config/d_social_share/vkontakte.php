@@ -6,7 +6,7 @@ $_['d_social_share_vkontakte'] = array(
         "id" => 'vkontakte',
         //js-socials
         "share" => array(
-            'label' => "Like",
+            'label' => array(1=>"Like"),
             'logo' => "fa fa-vk",
         ),
         'style' => array(

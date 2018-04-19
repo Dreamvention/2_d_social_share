@@ -36,9 +36,24 @@
             </div>
             <div class="col-sm-10">
                 <select class="form-control" onchange="{this.changeAnimations}" name="{state.codename}_setting[design][animation]">
-                    <option each={value, style_animation in state.design.styles} value={style_animation}
-                            selected={state.design.style==style_animation}>
-                        {state.text.styles[sty]}
+                    <option each={value, i in state.design.animations} value={value}
+                            selected={state.design.animation==value}>
+                        {state.text.animations[value]}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-2">
+                <label>{state.text_animation_type}</label>
+            </div>
+            <div class="col-sm-10">
+                <select class="form-control" onchange="{this.changeAnimationType}" >
+                    <option each={value, i in state.design.animations_types} value={value}
+                            selected={state.design.animation_type==value}>
+                        {state.text.animations_types[value]}
                     </option>
                 </select>
             </div>
@@ -76,6 +91,14 @@
         }
         this.changeRounded = (e) => {
             self.state.design.rounded = e.target.value;
+            self.store.updateState(['design'], self.state.design);
+        }
+        this.changeAnimationType = (e) =>{
+            self.state.design.animation_type = e.target.value;
+            self.store.updateState(['design'], self.state.design);
+        }
+        this.changeAnimations = (e) =>{
+            self.state.design.animation = e.target.value;
             self.store.updateState(['design'], self.state.design);
         }
         this.changeSize = (e) =>{

@@ -17,7 +17,12 @@
         <div if="{button.enabled}">
             <div class="form-group" if="{state.config.showLabel}">
                 <label for="">{state.text_button_label}</label>
-                <input type="text" class="form-control" value="{button.share.label}" onchange="{labelChange}">
+                <div class="form-group" if="{state.config.showLabel}">
+                    <div class="input-group" each="{language in state.languages}">
+                        <label class="input-group-addon"  title="{ language.name }"><img src="{ language.flag }" title="{ language.name }" /></label>
+                        <input type="text" class="form-control" value="{button.share.label[language.language_id]}" onchange="{labelChange}">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <shb_logo logo="{button.share.logo}" id="{this.i}"></shb_logo>
@@ -48,7 +53,7 @@
         this.isLabeled = !self.state.design.rounded && self.state.config.showLabel;
         this.isCustomStyle = self.state.design.style == 'flat' ;//|| self.state.design.style =='flat' feature
         labelChange = function (e) {
-            self.state.buttons[e.item.i].share.label = e.target.value;
+            self.state.buttons[this.i].share.label[self.state.language] = e.target.value;
             self.store.updateState(['buttons'], self.state.buttons);
         };
         self.on('mount', function () {

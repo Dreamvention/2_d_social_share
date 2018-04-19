@@ -43,6 +43,12 @@ class ModelExtensionModuleDSocialShare extends Model
         foreach ($config['design']['styles'] as $key => $value ) {
             $text_sizes['styles'][$key]=$this->language->get('text_'.$key);
         }
+        foreach ($config['design']['animations'] as $key => $value ) {
+            $text_sizes['animations'][$value]=$this->language->get('text_'.$value);
+        }
+        foreach ($config['design']['animations_types'] as $key => $value ) {
+            $text_sizes['animations_types'][$value]=$this->language->get('text_'.$value);
+        }
         foreach ($config['config']['shareIns'] as $value ) {
             $text_sizes['shareIns'][$value]=$this->language->get('text_'.$value);
         }

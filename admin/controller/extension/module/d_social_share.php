@@ -52,10 +52,10 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addStyle('view/javascript/d_bootstrap_colorpicker/css/bootstrap-colorpicker.css');
         $this->document->addScript('view/javascript/d_bootstrap_colorpicker/js/bootstrap-colorpicker.js');
 
-        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css');
+        $this->document->addStyle('../catalog/view/javascript/'.$this->codename.'/jssocials/dist/jssocials.css');
 
-        $this->document->addStyle('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.css');
-        $this->document->addScript('../catalog/view/javascript/d_social_share/jssocials/dist/jssocials.js');
+        $this->document->addStyle('../catalog/view/javascript/'.$this->codename.'/jssocials/dist/jssocials.css');
+        $this->document->addScript('../catalog/view/javascript/'.$this->codename.'/jssocials/dist/jssocials.js');
         $this->document->addStyle('view/stylesheet/' . $this->codename . '/styles.css');
 
         $admin_theme = 'light';
@@ -69,6 +69,9 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addScript('view/javascript/' . $this->codename . '/library/fontIconPicker/jquery.fonticonpicker.min.js ');
         $this->document->addStyle('view/javascript/' . $this->codename . '/library/fontIconPicker/jquery.fonticonpicker.css');
         $this->document->addStyle('view/javascript/' . $this->codename . '/library/fontIconPicker/jquery.fonticonpicker.grey.min.css');
+//animation
+        $this->document->addStyle('../catalog/view/theme/default/stylesheet/'.$this->codename.'/animate.css');
+
 
         $this->document->setTitle($this->language->get('heading_title_main'));
 
@@ -136,6 +139,8 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['text_breakpoints'] = $this->language->get('text_breakpoints');
         $state['text_smallScreenWidth'] = $this->language->get('text_smallScreenWidth');
         $state['text_largeScreenWidth'] = $this->language->get('text_largeScreenWidth');
+        $state['text_animation'] = $this->language->get('text_animation');
+        $state['text_animation_type'] = $this->language->get('text_animation_type');
 
         $state['text_custom_url'] = $this->language->get('text_custom_url');
 
@@ -164,6 +169,17 @@ class ControllerExtensionModuleDSocialShare extends Controller
             'text' => $this->language->get('text_module'),
             'href' => $this->model_extension_d_opencart_patch_url->getExtensionAjax('module')
         );
+        //languages
+        $this->load->model('localisation/language');
+        $state['languages'] = $this->model_localisation_language->getLanguages();
+        $state['language'] = $this->config->get('language_id');
+        foreach ($state['languages'] as $key =>  $language){
+            if(VERSION >= '2.2.0.0'){
+                $state['languages'][$key]['flag'] = 'language/'.$language['code'].'/'.$language['code'].'.png';
+            }else{
+                $state['languages'][$key]['flag'] = 'view/image/flags/'.$language['image'];
+            }
+        }
 
         if (!isset($this->request->get['module_id'])) {
             $state['breadcrumbs'][] = array(
@@ -187,6 +203,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['get_cancel'] = $this->model_extension_d_opencart_patch_url->getExtensionAjax('module');
         $state['module_link'] = $this->model_extension_d_opencart_patch_url->link($this->route);
 
+        $state['language'] = $this->config->get('config_language_id');
         if (isset($this->request->get['module_id'])) {
             $module_info = $this->model_extension_d_opencart_patch_module->getModule($this->request->get['module_id']);
         }

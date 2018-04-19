@@ -27,7 +27,6 @@ riot.tag2('d_social_share', '<div class="page-header"><div class="container-flui
         }.bind(this)
         self.state = this.store.getState();
         self.on('mount', function () {
-            console.log(this.state)
             loadlibs();
             $('#status').on('switchChange.bootstrapSwitch', function (e, state) {
                 self.state.status = state;
@@ -117,7 +116,7 @@ riot.tag2('sh_buttons', '<h3>{state.text_buttons}</h3><div class="buttons-wrap" 
             self.state = self.store.getState();
         });
 });
-riot.tag2('sh_design', '<h3>{state.text_design}</h3><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_size}</label></div><div class="col-sm-10"><select class="form-control" onchange="{changeSize}" name="{state.codename}_setting[design][size]"><option each="{value, size in state.design.sizes}" riot-value="{size}" selected="{state.design.size==size}"> {state.text.sizes[size]} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_style}</label></div><div class="col-sm-10"><select class="form-control" onchange="{this.changeStyles}" name="{state.codename}_setting[design][style]"><option each="{value, sty in state.design.styles}" riot-value="{sty}" selected="{state.design.style==sty}"> {state.text.styles[sty]} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_animation}</label></div><div class="col-sm-10"><select class="form-control" onchange="{this.changeAnimations}" name="{state.codename}_setting[design][animation]"><option each="{value, style_animation in state.design.styles}" riot-value="{style_animation}" selected="{state.design.style==style_animation}"> {state.text.styles[sty]} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_rounded}</label></div><div class="col-sm-10"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[design][rounded]" class="switcher" data-label-text="{state.text_enabled}" checked="{state.design.rounded ? \'checked\':\'\'}" id="rounded" value="1" onchange="{changeRounded}"></span></div></div></div>', '', '', function(opts) {
+riot.tag2('sh_design', '<h3>{state.text_design}</h3><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_size}</label></div><div class="col-sm-10"><select class="form-control" onchange="{changeSize}" name="{state.codename}_setting[design][size]"><option each="{value, size in state.design.sizes}" riot-value="{size}" selected="{state.design.size==size}"> {state.text.sizes[size]} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_style}</label></div><div class="col-sm-10"><select class="form-control" onchange="{this.changeStyles}" name="{state.codename}_setting[design][style]"><option each="{value, sty in state.design.styles}" riot-value="{sty}" selected="{state.design.style==sty}"> {state.text.styles[sty]} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_animation}</label></div><div class="col-sm-10"><select class="form-control" onchange="{this.changeAnimations}" name="{state.codename}_setting[design][animation]"><option each="{value, i in state.design.animations}" riot-value="{value}" selected="{state.design.animation==value}"> {state.text.animations[value]} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_animation_type}</label></div><div class="col-sm-10"><select class="form-control" onchange="{this.changeAnimationType}"><option each="{value, i in state.design.animations_types}" riot-value="{value}" selected="{state.design.animation_type==value}"> {state.text.animations_types[value]} </option></select></div></div></div><div class="form-group"><div class="row"><div class="col-sm-2"><label>{state.text_rounded}</label></div><div class="col-sm-10"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[design][rounded]" class="switcher" data-label-text="{state.text_enabled}" checked="{state.design.rounded ? \'checked\':\'\'}" id="rounded" value="1" onchange="{changeRounded}"></span></div></div></div>', '', '', function(opts) {
         this.mixin({store: d_social_share});
         var self = this;
         self.state = self.store.getState();
@@ -128,6 +127,14 @@ riot.tag2('sh_design', '<h3>{state.text_design}</h3><div class="form-group"><div
         }
         this.changeRounded = (e) => {
             self.state.design.rounded = e.target.value;
+            self.store.updateState(['design'], self.state.design);
+        }
+        this.changeAnimationType = (e) =>{
+            self.state.design.animation_type = e.target.value;
+            self.store.updateState(['design'], self.state.design);
+        }
+        this.changeAnimations = (e) =>{
+            self.state.design.animation = e.target.value;
             self.store.updateState(['design'], self.state.design);
         }
         this.changeSize = (e) =>{
@@ -183,6 +190,25 @@ riot.tag2('sh_settings', '<h3>{state.text_settings}</h3><div class="form-group">
 
 });
 riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"><div class="show-back-foot"></div></div><div class="button_load"><div id="{state.codename}"></div></div></div><link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css" if="{state.design.style != \'custom\'}">', '', '', function(opts) {
+
+
+        this.mixin({store: d_social_share});
+        var self = this;
+        self.state = this.store.getState();
+        self.on('mount', function () {
+
+            setTimeout(initView, 200);
+            getButtons();
+
+        })
+        self.on('updated', function () {
+            setTimeout(initView, 50);
+            getButtons();
+        });
+        self.on('update', function () {
+            self.state = self.store.getState();
+        });
+
         function getButtons() {
             $("#" + self.state.codename).jsSocials({
                 url: self.state.custom_url,
@@ -196,24 +222,42 @@ riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"
             })
         }
 
-        function addClass(className, classValues) {
-            styleContainer = className + '{';
-            for (key in classValues) {
-                styleContainer += key + ':' + classValues[key] + ';'
-            }
-            styleContainer += '}';
-            return styleContainer;
-        }
+        function initView() {
+            setStyles();
 
-        function SetStyles() {
+            console.log()
+
+            if (self.state.design.animation_type=='hover'){
+                $('.jssocials-share').hover(function (e) {
+                    $(this).addClass('animated '+self.state.design.animation)
+                    var that =$(this);
+                    setTimeout(function () {
+                        that.removeClass('animated '+self.state.design.animation)
+                    },1000)
+
+                })
+            }
+            if (self.state.design.animation_type=='click'){
+                $('.jssocials-share-link').click(function (e) {
+                    e.preventDefault();
+                    console.log('click')
+                    $(this).addClass('animated '+self.state.design.animation)
+                    var that =$(this);
+                    setTimeout(function () {
+                        that.removeClass('animated '+self.state.design.animation)
+                    },1000)
+
+                })
+            }
+        }
+        function setStyles(){
             $('html > head').find('[title="d_social_share"]').remove();
             var style = '<style title="d_social_share">';
-            style += addClass('.jssocials-share-link',
-                {
-                    'border-radius': self.state.design.rounded ? '50% !important' : '0',
-                    'padding': self.state.design.sizes[self.state.design.size].padding + " !important",
-                    'font-size': self.state.design.sizes[self.state.design.size]['font-size'],
-                })
+            style += addClass('.jssocials-share-link', {
+                'border-radius': self.state.design.rounded ? '50% !important' : '0',
+                'padding': self.state.design.sizes[self.state.design.size].padding + " !important",
+                'font-size': self.state.design.sizes[self.state.design.size]['font-size'],
+            })
             if (self.state.design.style == 'flat') {
                 for (var button_key in self.state.buttons) {
                     var button = self.state.buttons[button_key];
@@ -243,11 +287,9 @@ riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"
                 }
             }
             style += '</style>'
-            var $style = $(style)
-            $('html > head').append($style);
+            $('html > head').append($(style));
         }
-
-        getButtonsShares = function () {
+        function getButtonsShares() {
             var buttons = [];
 
             function compareNumeric(a, b) {
@@ -258,20 +300,27 @@ riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"
             var buttons_un_sorted = self.state.buttons;
 
             for (var button_key in buttons_un_sorted) {
-                var button = self.state.buttons[button_key];
+                var button = jQuery.extend(true, {}, self.state.buttons[button_key]);
                 if (button.enabled) {
                     var button_share = button.share;
                     button_share.share = button.id;
                     button_share.sort_order = button.sort_order;
+                    button_share.label = button.share.label[self.state.language];
 
                     buttons.push(button_share)
-
                 }
             }
             buttons.sort(compareNumeric);
             return buttons;
         }
-
+        function addClass(className, classValues) {
+            styleContainer = className + '{';
+            for (key in classValues) {
+                styleContainer += key + ':' + classValues[key] + ';'
+            }
+            styleContainer += '}';
+            return styleContainer;
+        }
         function getNativeButton(native) {
             switch (native) {
                 case 'facebook':
@@ -351,25 +400,8 @@ riot.tag2('sh_show_room', '<div class="show-buttons-wrap"><div class="show-wrap"
                     }
             }
         }
-
-        this.mixin({store: d_social_share});
-        var self = this;
-        self.state = this.store.getState();
-        self.on('mount', function () {
-
-            setTimeout(SetStyles, 200);
-            getButtons();
-
-        })
-        self.on('updated', function () {
-            setTimeout(SetStyles, 50);
-            getButtons();
-        });
-        self.on('update', function () {
-            self.state = self.store.getState();
-        });
 });
-riot.tag2('sh_button_info', '<div class="sh_button_wrap"><div class="sh_title page-header"><h3>{this.i}</h3></div><div class="form-group"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[buttons][enable]" class="switcher" id="{this.i}" data-size="mini" data-label-text="{state.text_enabled}" checked="{button.enabled ? \'checked\':\'\'}" value="1"></span></div><div if="{button.enabled}"><div class="form-group" if="{state.config.showLabel}"><label for="">{state.text_button_label}</label><input type="text" class="form-control" riot-value="{button.share.label}" onchange="{labelChange}"></div><div class="form-group"><shb_logo logo="{button.share.logo}" id="{this.i}"></shb_logo></div><div class="form-group" if="{state.design.style==\'flat\'}"><label for="">{state.text_colors}</label><shb_style styles="{button.style}" button="{i}"></shb_style></div><div class="form-group" if="{!(typeof (button.style.native) === \'undefined\')}"><span class="sh_button_native" if="{!(typeof (button.style.native) === \'undefined\')}"><label for="">{state.text_native}</label><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[buttons][{this.i}][style][native]" class="switcher" data-size="mini" checked="{button.style.native ? \'checked\':\'\'}" id="{this.i}_native" value="1"></span></div></div></div>', '', '', function(opts) {
+riot.tag2('sh_button_info', '<div class="sh_button_wrap"><div class="sh_title page-header"><h3>{this.i}</h3></div><div class="form-group"><span class="sh_button_enable"><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[buttons][enable]" class="switcher" id="{this.i}" data-size="mini" data-label-text="{state.text_enabled}" checked="{button.enabled ? \'checked\':\'\'}" value="1"></span></div><div if="{button.enabled}"><div class="form-group" if="{state.config.showLabel}"><label for="">{state.text_button_label}</label><div class="form-group" if="{state.config.showLabel}"><div class="input-group" each="{language in state.languages}"><label class="input-group-addon" title="{language.name}"><img riot-src="{language.flag}" title="{language.name}"></label><input type="text" class="form-control" riot-value="{button.share.label[language.language_id]}" onchange="{labelChange}"></div></div></div><div class="form-group"><shb_logo logo="{button.share.logo}" id="{this.i}"></shb_logo></div><div class="form-group" if="{state.design.style==\'flat\'}"><label for="">{state.text_colors}</label><shb_style styles="{button.style}" button="{i}"></shb_style></div><div class="form-group" if="{!(typeof (button.style.native) === \'undefined\')}"><span class="sh_button_native" if="{!(typeof (button.style.native) === \'undefined\')}"><label for="">{state.text_native}</label><input type="hidden" name="" value="0"><input type="checkbox" name="{state.codename}_setting[buttons][{this.i}][style][native]" class="switcher" data-size="mini" checked="{button.style.native ? \'checked\':\'\'}" id="{this.i}_native" value="1"></span></div></div></div>', '', '', function(opts) {
         this.mixin({store: d_social_share});
         var self = this;
         self.state = self.store.getState();
@@ -377,7 +409,7 @@ riot.tag2('sh_button_info', '<div class="sh_button_wrap"><div class="sh_title pa
         this.isLabeled = !self.state.design.rounded && self.state.config.showLabel;
         this.isCustomStyle = self.state.design.style == 'flat' ;
         labelChange = function (e) {
-            self.state.buttons[e.item.i].share.label = e.target.value;
+            self.state.buttons[this.i].share.label[self.state.language] = e.target.value;
             self.store.updateState(['buttons'], self.state.buttons);
         };
         self.on('mount', function () {

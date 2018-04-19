@@ -10,8 +10,26 @@
     </div>
     <link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css"
           if="{state.design.style != 'custom'}">
-
     <script>
+
+
+        this.mixin({store: d_social_share});
+        var self = this;
+        self.state = this.store.getState();
+        self.on('mount', function () {
+            // костыли потому что не могу биндить стиль if он всеравно подключается
+            setTimeout(initView, 200);
+            getButtons();//jsSocials
+
+        })
+        self.on('updated', function () {
+            setTimeout(initView, 50);
+            getButtons();//jsSocials
+        });
+        self.on('update', function () {
+            self.state = self.store.getState();
+        });
+
         function getButtons() {
             $("#" + self.state.codename).jsSocials({
                 url: self.state.custom_url,
@@ -25,24 +43,42 @@
             })
         }
 
-        function addClass(className, classValues) {
-            styleContainer = className + '{';
-            for (key in classValues) {
-                styleContainer += key + ':' + classValues[key] + ';'
-            }
-            styleContainer += '}';
-            return styleContainer;
-        }
+        function initView() {
+            setStyles();
+            // animate
+            console.log()
+//            $('.jssocials-share').addClass('animated ' + self.state.design.animation);
+            if (self.state.design.animation_type=='hover'){
+                $('.jssocials-share').hover(function (e) {
+                    $(this).addClass('animated '+self.state.design.animation)
+                    var that =$(this);
+                    setTimeout(function () {
+                        that.removeClass('animated '+self.state.design.animation)
+                    },1000)
 
-        function SetStyles() {
-            $('html > head').find('[title="d_social_share"]').remove();
-            var style = '<style title="d_social_share">';//'</style>'
-            style += addClass('.jssocials-share-link',
-                {
-                    'border-radius': self.state.design.rounded ? '50% !important' : '0',
-                    'padding': self.state.design.sizes[self.state.design.size].padding + " !important",
-                    'font-size': self.state.design.sizes[self.state.design.size]['font-size'],
                 })
+            }
+            if (self.state.design.animation_type=='click'){
+                $('.jssocials-share-link').click(function (e) {
+                    e.preventDefault();
+                    console.log('click')
+                    $(this).addClass('animated '+self.state.design.animation)
+                    var that =$(this);
+                    setTimeout(function () {
+                        that.removeClass('animated '+self.state.design.animation)
+                    },1000)
+
+                })
+            }
+        }
+        function setStyles(){
+            $('html > head').find('[title="d_social_share"]').remove();
+            var style = '<style title="d_social_share">';
+            style += addClass('.jssocials-share-link', {
+                'border-radius': self.state.design.rounded ? '50% !important' : '0',
+                'padding': self.state.design.sizes[self.state.design.size].padding + " !important",
+                'font-size': self.state.design.sizes[self.state.design.size]['font-size'],
+            })
             if (self.state.design.style == 'flat') {
                 for (var button_key in self.state.buttons) {
                     var button = self.state.buttons[button_key];
@@ -72,11 +108,9 @@
                 }
             }
             style += '</style>'
-            var $style = $(style)
-            $('html > head').append($style);
+            $('html > head').append($(style));
         }
-
-        getButtonsShares = function () {
+        function getButtonsShares() {
             var buttons = [];
 
             //need to sort them
@@ -86,25 +120,33 @@
             }
 
             var buttons_un_sorted = self.state.buttons;
+
             // alert(buttons_un_sorted);
             for (var button_key in buttons_un_sorted) {
-                var button = self.state.buttons[button_key];
+                var button = jQuery.extend(true, {}, self.state.buttons[button_key]);
                 if (button.enabled) {
                     var button_share = button.share;
                     button_share.share = button.id;
                     button_share.sort_order = button.sort_order;
+                    button_share.label = button.share.label[self.state.language];
                     // if (typeof button.style.native != 'undefined' && button.style.native ){
                     //     if (typeof button_share.renderer=='undefined')
                     //     button_share.renderer = getNativeButton(button.id)
                     // } donn't work yet in admin
                     buttons.push(button_share)
-
                 }
             }
             buttons.sort(compareNumeric);
             return buttons;
         }
-
+        function addClass(className, classValues) {
+            styleContainer = className + '{';
+            for (key in classValues) {
+                styleContainer += key + ':' + classValues[key] + ';'
+            }
+            styleContainer += '}';
+            return styleContainer;
+        }
         function getNativeButton(native) {
             switch (native) {
                 case 'facebook':
@@ -184,22 +226,5 @@
                     }
             }
         }
-
-        this.mixin({store: d_social_share});
-        var self = this;
-        self.state = this.store.getState();
-        self.on('mount', function () {
-            // костыли потому что не могу биндить стиль if он всеравно подключается
-            setTimeout(SetStyles, 200);
-            getButtons();//jsSocials
-
-        })
-        self.on('updated', function () {
-            setTimeout(SetStyles, 50);
-            getButtons();//jsSocials
-        });
-        self.on('update', function () {
-            self.state = self.store.getState();
-        });
     </script>
 </sh_show_room>

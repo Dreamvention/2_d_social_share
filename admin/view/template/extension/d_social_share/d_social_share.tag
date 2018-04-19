@@ -104,7 +104,6 @@
         }
         self.state = this.store.getState();
         self.on('mount', function () {
-            console.log(this.state)
             loadlibs();
             $('#status').on('switchChange.bootstrapSwitch', function (e, state) {
                 self.state.status = state;
