@@ -4,8 +4,8 @@ $_['d_social_share'] = array(
     'custom_url' => 'google.com',// may be
     "buttons"    => array(),
     "design"     => array(
-        'size'           => 'medium',
-        'sizes'          => array(
+        'size'             => 'medium',
+        'sizes'            => array(
             'extra_small' => array(
                 'padding'   => '.4rem',
                 'font-size' => '1.1em'
@@ -28,11 +28,13 @@ $_['d_social_share'] = array(
             ),
 //            'custom' => array()
         ),
-        'placement'      => 'module',
-        'placements'     => array('module', 'fixed' => array('bottom', 'left', 'right'), 'product'),
-        'rounded'        => true,
-        'style'          => 'flat',
-        'styles'         => array(
+        'placement'        => 'fixed',
+        'placements'       => array('module', 'fixed', 'product'),
+        'fixed'            => 'right',
+        'fixed_placement'  => array('bottom', 'left', 'right'),
+        'rounded'          => true,
+        'style'            => 'flat',
+        'styles'           => array(
             'flat'    => array(),
             'classic' => array(),
             'minimal' => array(),
@@ -44,14 +46,14 @@ $_['d_social_share'] = array(
 //                'jssocials-share-no-count' => ''
 //            ),
         ),
-        'animation'      => 'bounce',
-        'animation_type' => 'click',
-        'animations_types'     => array(
+        'animation'        => 'pulse',
+        'animation_type'   => 'hover',
+        'animations_types' => array(
             'hover',
             'click',
             'none',
         ),
-        'animations'     => array(
+        'animations'       => array(
             'none',
             'slideInUp',
             'pulse',
@@ -68,8 +70,8 @@ $_['d_social_share'] = array(
     ),
     'config'     => array(
         'text_to_share' => array(1 => "Text to share"),
-        'showLabel'     => true,
-        'showCount'     => false,
+        'showLabel'     => false,
+        'showCount'     => true,
         'shareIn'       => 'popup',
         'breakpoints'   => array(
             'smallScreenWidth' => 640,

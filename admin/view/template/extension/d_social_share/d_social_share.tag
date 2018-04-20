@@ -53,14 +53,14 @@
             <div class="panel-body" >
                 <sh_navigation></sh_navigation>
                 <form id="setting_form" action="">
-                    <div class="tab-content ">
+                    <div class="tab-content">
                         <div class="tab-pane active" id="nav_buttons">
                             <sh_buttons></sh_buttons>
                         </div>
-                        <div class="tab-pane " id="nav_design">
+                        <div class="tab-pane" id="nav_design">
                             <sh_design></sh_design>
                         </div>
-                        <div class="tab-pane " id="nav_setting">
+                        <div class="tab-pane" id="nav_setting">
                             <sh_settings></sh_settings>
                         </div>
                         <div class="tab-pane" id="nav_help_me">

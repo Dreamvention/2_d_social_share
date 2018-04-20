@@ -50,11 +50,11 @@
                 <label>{state.text_show_count}</label>
             </div>
             <div class="col-sm-10">
-            <span class="sh_button_enable">
+                <span class="sh_button_enable">
                     <input type="hidden" name="" value="0"/>
                     <input type="checkbox" name="{state.codename}_setting[config][showCount]" class="switcher"
                            data-label-text="{ state.text_enabled }"
-                           checked="{state.config.showLabel ? 'checked':''}"
+                           checked="{state.config.showCount ? 'checked':''}"
                            id="showCount"
                            value="1" onchange="{changShowCount}"/>
                 </span>

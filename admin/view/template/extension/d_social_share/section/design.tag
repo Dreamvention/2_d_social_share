@@ -29,6 +29,9 @@
             </div>
         </div>
     </div>
+    <legend>
+        {state.text_animations}
+    </legend>
     <div class="form-group">
         <div class="row">
             <div class="col-sm-2">
@@ -59,6 +62,44 @@
             </div>
         </div>
     </div>
+    <legend>
+        {state.text_placements}
+    </legend>
+    <div class="form-group">
+        <virtual if={state.design.placement=='fixed'}>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>{state.text_placement}</label>
+                </div>
+                <div class="col-sm-10">
+
+                    <select class="form-control" onchange="{this.changeFixedPlacement}">
+                        <option each={value, key in state.design.fixed_placement} selected={state.design.fixed==value}
+                                value="{value}">
+                            {state.text.fixed_placement[value]}
+                        </option>
+                    </select>
+                </div>
+            </div></div>
+        </virtual>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>{state.text_placement}</label>
+                </div>
+
+                <div class="col-sm-10">
+                    <select class="form-control" onchange="{this.changePlacement}">
+                        <option each={value, key in state.design.placements} selected={state.design.placement==value}
+                                value="{value}">
+                            {state.text.placements[value]}
+
+                        </option>
+                    </select>
+                </div>
+            </div></div>
+    </div>
 
     <div class="form-group">
             <div class="row">
@@ -69,6 +110,8 @@
             <span class="sh_button_enable">
                     <input type="hidden" name="" value="0"/>
                     <input type="checkbox" name="{state.codename}_setting[design][rounded]" class="switcher"
+                           data-on-text="{ state.text_enabled }"
+                           data-off-text="{ state.text_enabled }"
                            data-label-text="{ state.text_enabled }"
                            checked="{state.design.rounded ? 'checked':''}"
                            id="rounded"
@@ -99,6 +142,14 @@
         }
         this.changeAnimations = (e) =>{
             self.state.design.animation = e.target.value;
+            self.store.updateState(['design'], self.state.design);
+        }
+        this.changeFixedPlacement = (e) =>{
+            self.state.design.fixed = e.target.value;
+            self.store.updateState(['design'], self.state.design);
+        }
+        this.changePlacement = (e) =>{
+            self.state.design.placement = e.target.value;
             self.store.updateState(['design'], self.state.design);
         }
         this.changeSize = (e) =>{

@@ -43,7 +43,7 @@
             {% endfor %}
         </div>
     {% endif %}
-    <div id="{{ codename }}" class="{{ design.size }} {{ design.style }}"></div>
+    <div id="{{ codename }}" class="{{ design.size }} {{ design.style }} {{ design.placement }} {{ design.fixed }}"></div>
     <script>
         // todo move to my.js
         function getNativeButton(native) {
@@ -147,8 +147,30 @@
                         {% endif %}},
                     {% endfor %}
         ]
-        })
-            ;//jsSocials
+        });
+            // animate
+            if ('{{ design.animation_type }}'=='hover'){
+                $('.jssocials-share').hover(function (e) {
+                    $(this).addClass('animated '+'{{ design.animation }}')
+                    var that =$(this);
+                    setTimeout(function () {
+                        that.removeClass('animated '+'{{ design.animation}}')
+                    },1000)
+
+                })
+            }
+            if ('{{ design.animation_type}}'=='click'){
+                $('.jssocials-share-link').click(function (e) {
+                    e.preventDefault();
+                    console.log('click')
+                    $(this).addClass('animated '+'{{ design.animation}}')
+                    var that = $(this);
+                    setTimeout(function () {
+                        that.removeClass('animated '+'{{ design.animation}}')
+                    },1000)
+
+                })
+            }
         });//document ready
     </script>
 </div>

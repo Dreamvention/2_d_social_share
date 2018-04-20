@@ -71,6 +71,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $this->document->addStyle('view/javascript/' . $this->codename . '/library/fontIconPicker/jquery.fonticonpicker.grey.min.css');
 //animation
         $this->document->addStyle('../catalog/view/theme/default/stylesheet/'.$this->codename.'/animate.css');
+        $this->document->addStyle('../catalog/view/theme/default/stylesheet/'.$this->codename.'/styles.css');
 
 
         $this->document->setTitle($this->language->get('heading_title_main'));
@@ -140,7 +141,9 @@ class ControllerExtensionModuleDSocialShare extends Controller
         $state['text_smallScreenWidth'] = $this->language->get('text_smallScreenWidth');
         $state['text_largeScreenWidth'] = $this->language->get('text_largeScreenWidth');
         $state['text_animation'] = $this->language->get('text_animation');
+        $state['text_animations'] = $this->language->get('text_animations');
         $state['text_animation_type'] = $this->language->get('text_animation_type');
+        $state['text_placement'] = $this->language->get('text_placement');
 
         $state['text_custom_url'] = $this->language->get('text_custom_url');
 
@@ -234,7 +237,6 @@ class ControllerExtensionModuleDSocialShare extends Controller
             }
             array_multisort($sort_order, SORT_ASC, $buttons);
             $state['buttons'] = $buttons;
-            $design = $module_info['d_social_share_setting']['design'];
             $state['design'] = $module_info['d_social_share_setting']['design'];
             $state['config'] = $module_info['d_social_share_setting']['config'];
         }

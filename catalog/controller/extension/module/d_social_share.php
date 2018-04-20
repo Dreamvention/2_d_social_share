@@ -41,6 +41,10 @@ class ControllerExtensionModuleDSocialShare extends Controller
             $this->document->addStyle($this->js_folder . '/jssocials/dist/jssocials.css');
             $this->document->addStyle($this->js_folder . '/jssocials/dist/jssocials-theme-' . $this->setting['design']['style'] . '.css');
         }
+        //animation
+        $this->document->addStyle('catalog/view/theme/default/stylesheet/'.$this->codename.'/animate.css');
+        $this->document->addStyle('catalog/view/theme/default/stylesheet/'.$this->codename.'/styles.css');
+
         //show error
         if (isset($this->session->data['d_social_share_error'])) {
             $data['error'] = $this->session->data['d_social_share_error'];

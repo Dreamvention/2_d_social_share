@@ -4,21 +4,21 @@
             <div class="show-back-foot">
             </div>
         </div>
-        <div class="button_load">
-            <div id="{state.codename}"></div>
+        <div class="button_load {state.design.placement}">
+            <div class="d-social-buttons-container">
+                <div id="{state.codename}" class="{state.design.placement} {state.design.fixed}"></div>
+            </div>
         </div>
     </div>
     <link rel="stylesheet" href="{state.styles_link[state.design.style]}" type="text/css"
           if="{state.design.style != 'custom'}">
     <script>
-
-
         this.mixin({store: d_social_share});
         var self = this;
         self.state = this.store.getState();
         self.on('mount', function () {
             // костыли потому что не могу биндить стиль if он всеравно подключается
-            setTimeout(initView, 200);
+            setTimeout(initView, 50);
             getButtons();//jsSocials
 
         })
@@ -46,8 +46,6 @@
         function initView() {
             setStyles();
             // animate
-            console.log()
-//            $('.jssocials-share').addClass('animated ' + self.state.design.animation);
             if (self.state.design.animation_type=='hover'){
                 $('.jssocials-share').hover(function (e) {
                     $(this).addClass('animated '+self.state.design.animation)
