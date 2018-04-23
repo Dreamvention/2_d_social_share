@@ -5,7 +5,7 @@ $_['heading_title_main'] = 'Social Share';
 $_['text_edit'] = 'Edit Social Share module';
 $_['text_status'] = 'Status';
 $_['text_name'] = 'Name for your shares';
-$_['text_module'] = 'module';
+$_['text_module'] = 'Module';
 
 // Modules
 $_['entry_name'] = 'Module name';
@@ -55,6 +55,32 @@ $_['text_self'] = 'style';
 $_['text_breakpoints'] = 'Breakpoints';
 $_['text_smallScreenWidth'] = 'Small screen width';
 $_['text_largeScreenWidth'] = 'Large screen width';
+$_['text_animations'] = 'Animations';
+$_['text_animation'] = 'Animation';
+$_['text_animation_type'] = 'Animation type';
+$_['text_slideInUp'] = 'SlideInUp';
+$_['text_pulse'] = 'Pulse';
+$_['text_tada'] = 'Tada';
+$_['text_jello'] = 'Jello';
+$_['text_fadeIn'] = 'FadeIn';
+$_['text_fadeInUp'] = 'FadeInUp';
+$_['text_bounce'] = 'Bounce';
+$_['text_bounceIn'] = 'BounceIn';
+$_['text_zoomIn'] = 'ZoomIn';
+$_['text_zoomInDown'] = 'ZoomInDown';
+$_['text_zoomInUp'] = 'ZoomInUp';
+//text animations
+
+//placement
+
+$_['text_placement_position'] = 'Placement_position';
+$_['text_placement'] = 'Placement';
+$_['text_hover'] = 'Hover';
+$_['text_click'] = 'Click';
+$_['text_left'] = 'Left';
+$_['text_right'] = 'Right';
+$_['text_bottom'] = 'Bottom';
+$_['text_fixed'] = 'Fixed';
 
 
 //buttons
