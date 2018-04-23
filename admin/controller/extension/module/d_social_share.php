@@ -37,7 +37,7 @@ class ControllerExtensionModuleDSocialShare extends Controller
                 $this->response->redirect($this->model_extension_d_opencart_patch_url->getExtensionLink('module'));
             }
         }
-        $this->load->model('customer/customer_group');
+
         $this->load->model('extension/d_opencart_patch/module');
         $this->load->model('extension/d_opencart_patch/url');
         $this->load->model('extension/d_opencart_patch/load');

@@ -73,7 +73,7 @@ $_['text_zoomInUp'] = 'ZoomInUp';
 
 //placement
 
-$_['text_placement_position'] = 'Placement_position';
+$_['text_placement_position'] = 'Placement position';
 $_['text_placement'] = 'Placement';
 $_['text_hover'] = 'Hover';
 $_['text_click'] = 'Click';
