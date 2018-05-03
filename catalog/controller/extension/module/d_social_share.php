@@ -52,12 +52,10 @@ class ControllerExtensionModuleDSocialShare extends Controller
         }
         //load languages text
         $buttons = array();
-//        var_export($this->setting['buttons']);
         foreach ($this->setting['buttons'] as $key => $button) {
             if ($button['enabled']) {
+                $button['share']['label'] = $button['share']['label'][$this->config->get('config_language_id')];
                 $buttons[$key] = $button;
-//                $buttons[$key]['text'] = $this->language->get($button['text']);
-//                $buttons[$key]['title'] = $this->language->get($button['title']);
             }
         }
         // sorting

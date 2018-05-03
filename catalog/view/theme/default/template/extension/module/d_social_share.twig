@@ -125,10 +125,12 @@
                     }
             }
         }
-
+        console.log({{ buttons|json_encode }})
         $(document).ready(function () {
             $("#{{ codename }}").jsSocials({
+            {% if custom_url %}
                 url: '{{ custom_url }}',
+            {% endif %}
                 text: '{{ config.text_to_share[1] }}',//to do make multilangua
                 showLabel: '{{ config.showLabel }}',
                 showCount: '{{ config.showCount }}',
