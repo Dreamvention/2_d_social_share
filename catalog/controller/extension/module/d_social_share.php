@@ -1,4 +1,4 @@
-    <?php
+<?php
 /*
  *  location: catalog/controller/extension/module/d_social_share.php
  */
@@ -42,8 +42,8 @@ class ControllerExtensionModuleDSocialShare extends Controller
             $this->document->addStyle($this->js_folder . '/jssocials/dist/jssocials-theme-' . $this->setting['design']['style'] . '.css');
         }
         //animation
-        $this->document->addStyle('catalog/view/theme/default/stylesheet/'.$this->codename.'/animate.css');
-        $this->document->addStyle('catalog/view/theme/default/stylesheet/'.$this->codename.'/styles.css');
+        $this->document->addStyle('catalog/view/theme/default/stylesheet/' . $this->codename . '/animate.css');
+        $this->document->addStyle('catalog/view/theme/default/stylesheet/' . $this->codename . '/styles.css');
 
         //show error
         if (isset($this->session->data['d_social_share_error'])) {
@@ -65,7 +65,6 @@ class ControllerExtensionModuleDSocialShare extends Controller
         }
         array_multisort($sort_order, SORT_ASC, $buttons);
 
-
         $data['buttons'] = $buttons;
         $data['design'] = $this->setting['design'];
         $data['config'] = $this->setting['config'];
@@ -78,9 +77,11 @@ class ControllerExtensionModuleDSocialShare extends Controller
 
     public function loadSetting($setting)
     {
-        return $setting[$this->codename.'_setting'];
+        return $setting[$this->codename . '_setting'];
     }
-    public function eventLoadSharesProduct(&$route, &$data, &$output){
+
+    public function eventLoadSharesProduct(&$route, &$data, &$output)
+    {
 
     }
 }
